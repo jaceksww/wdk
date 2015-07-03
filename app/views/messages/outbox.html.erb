@@ -1,0 +1,92 @@
+
+<div class="row inbox">
+				<div class="col-md-2">
+					<%= render ('messages/sidemenu'), active: 'outbox' %>
+				</div>
+				<div class="col-md-10">
+					<div class="inbox-header">
+						<h1 class="pull-left">Wysłane</h1>
+						
+					</div>
+					<div class="inbox-content">
+					<table class="table table-striped table-advance table-hover">
+					<thead>
+					<tr>
+						<th colspan="3">
+						<!--
+							<input type="checkbox" class="mail-checkbox mail-group-checkbox">
+							<div class="btn-group">
+								<a class="btn btn-sm blue dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+								More <i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="javascript:;">
+										<i class="fa fa-pencil"></i> Mark as Read </a>
+									</li>
+									<li>
+										<a href="javascript:;">
+										<i class="fa fa-ban"></i> Spam </a>
+									</li>
+									<li class="divider">
+									</li>
+									<li>
+										<a href="javascript:;">
+										<i class="fa fa-trash-o"></i> Delete </a>
+									</li>
+								</ul>
+							</div>
+						-->
+						</th>
+						<th class="pagination-control" colspan="4">
+							<!--
+							<span class="pagination-info">
+							1-30 of 789 </span>
+							<a class="btn btn-sm blue">
+							<i class="fa fa-angle-left"></i>
+							</a>
+							<a class="btn btn-sm blue">
+							<i class="fa fa-angle-right"></i>
+							</a>
+							-->
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					<% @outbox_messages.each do |el| %>
+					<% if !el['count_unread'] && !el['count_total'] %>
+					<% #render ('layouts/avatar'), avatar: el['avatar'], additionalclass: 'img-circle' %>
+						<tr data-messageid="<%= el['messageid'] %> ">
+							<td class="inbox-small-cells">
+								<input type="checkbox" class="mail-checkbox">
+							</td>
+							<td class="inbox-small-cells">
+								<i class="fa fa-star"></i>
+							</td>
+							<td class="view-message hidden-xs">
+								 <%= el['displayname'] %> 
+							</td>
+							<td class="view-message ">
+								<a href="/messages/view/<%= el['messageid'] %>">[ <%= el['subject'] %> ] <%= el['message'][0,30] %></a>
+							</td>
+							<td class="view-message inbox-small-cells">
+								<!--<i class="fa fa-paperclip"></i>-->
+							</td>
+							<td class="view-message text-right">
+								 <%= el['datecreated']['date'][0,16] %>
+							</td>
+							<td class="view-message text-right">
+								 <a href="/messages/delete/<%= el['messageid']%>/<%= el['userid']%>" onclick="return confirm('Usunąć element?')">
+									<span class="todo-tasklist-badge badge badge-roundless">Usuń</span>
+								</a>
+							</td>
+						</tr>
+					<% end %>
+					<% end %>
+					</tbody>
+					</table>
+					
+					</div>
+				</div>
+			</div>
+<%= stylesheet_link_tag    '/assets/admin/pages/css/inbox' %>

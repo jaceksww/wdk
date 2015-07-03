@@ -1,0 +1,208 @@
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="/">
+			<img src="/images/logo_wedkarskiportal.png" alt="logo" class="logo-default" style="position:relative;bottom:5px;" />
+			</a>
+			<div class="menu-toggler sidebar-toggler hide">
+				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+			</div>
+		</div>
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN TOP NAVIGATION MENU -->
+		<div class="top-menu">
+			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown dropdown-user">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<i class="fa fa-plus"></i> Dodaj
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<% if session[:isboot] == 0 %>
+								<a href="#addPostModal" data-toggle="modal">
+							<% else %>
+								<a href="#isBootModal" role="button" data-toggle="modal">
+							<% end %>
+								<i class="fa fa-plus"></i> Post</a>
+							
+						</li>
+						<li>
+							<% if session[:isboot] == 0 %>
+								<a href="#addImageModal" data-toggle="modal">
+							<% else %>
+								<a href="#isBootModal" role="button" data-toggle="modal">
+							<% end %>
+								<i class="fa fa-plus"></i> Zdjęcie</a>
+						</li>
+						<li>
+							<% if session[:isboot] == 0 %>
+								<a href="#addArticleModal"2 data-toggle="modal">
+							<% else %>
+								<a href="#isBootModal" role="button" data-toggle="modal">
+							<% end %>
+								<i class="fa fa-plus"></i> Artykuł</a>
+						</li>
+					</ul>
+				</li>
+				
+				<!-- BEGIN NOTIFICATION DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+					<a href="javascript:;" id="header-show-infos" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<i class="icon-bell"></i>
+					<% if session[:user] && @global_infos[0]['unread'] > 0 %>
+						<span class="badge badge-default"><%= @global_infos[0]['unread']%> </span>
+					<% end %>
+					</a>
+					<% if session[:user] %>
+					<ul class="dropdown-menu">
+						<li class="external">
+							<h3><span class="bold"><%= @global_infos[0]['unread']%> nieprzeczytane</span></h3>
+							<a href="/infos/">wszystkie</a>
+						</li>
+						<li>
+							<%= render partial: 'infos/latest' %>
+						</li>
+					</ul>
+					<% else %>
+					<ul class="dropdown-menu">
+						<li class="external">
+							<h3><span class="bold">Aby zobaczyć powiadomienia zaloguj się</h3>
+						</li>
+						<li>
+							<%= link_to "<i class='icon-user'></i> Zaloguj się".html_safe, users_login_path %>
+						</li>
+						
+						<% if session[:isboot] == 0 %>
+						<li>
+							<%= link_to "<i class='icon-key'></i> Utwórz konto".html_safe, users_create_account_path %>
+						</li>
+						<% else %>
+						<li>
+							<a href="#isBootModal" role="button" data-toggle="modal">
+							<i class='icon-key'></i> Utwórz konto
+							</a>
+						</li>
+						<% end %>
+					</ul>
+					<% end %>
+				</li>
+				<!-- END NOTIFICATION DROPDOWN -->
+				<!-- BEGIN INBOX DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<i class="icon-envelope-open"></i>
+					<% if session[:user] && @global_messages[1]['count_unread'] > 0 %>
+						<span class="badge badge-default"><%= @global_messages[1]['count_unread']%> </span>
+					<% end %>
+					</a>
+					<% if session[:user] %>
+					<ul class="dropdown-menu">
+						<li class="external">
+							<h3><span class="bold"><%= @global_messages[1]['unread']%> nieprzeczytane</span></h3>
+							<a href="/messages/inbox">wszystkie</a>
+						</li>
+						<li>
+							<%= render partial: 'messages/latest' %>
+						</li>
+					</ul>
+					<% else %>
+					<ul class="dropdown-menu">
+						<li class="external">
+							<h3><span class="bold">Aby zobaczyć powiadomienia zaloguj się</h3>
+						</li>
+						<li>
+							<%= link_to "<i class='icon-user'></i> Zaloguj się".html_safe, users_login_path %>
+						</li>
+						
+						<% if session[:isboot] == 0 %>
+						<li>
+							<%= link_to "<i class='icon-key'></i> Utwórz konto".html_safe, users_create_account_path %>
+						</li>
+						<% else %>
+						<li>
+							<a href="#isBootModal" role="button" data-toggle="modal">
+							<i class='icon-key'></i> Utwórz konto
+							</a>
+						</li>
+						<% end %>
+					</ul>
+					<% end %>
+				</li>
+				
+				</li>
+				<!-- END INBOX DROPDOWN -->
+				
+				<!-- BEGIN USER LOGIN DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-user">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<% if session[:user] %>
+						<%= render ('layouts/avatar'), avatar: session[:user]['avatar'], additionalclass: 'img-circle' %>
+					<% end %>
+					<span class="username username-hide-on-mobile">
+					<% if session[:user] %>
+						<%= session[:user]['displayname'] %>
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-default">
+						<li>
+							<%= link_to '<i class="icon-user"></i><span class="title"> Mój profil</span>'.html_safe, '/profil/'+ session[:user]['displayname'] %>
+						</li>
+						
+						<li>
+							<%= link_to '<i class="fa icon-envelope-open"></i><span class="title"> Moje Wiadomości</span>'.html_safe, '/messages/inbox' %>
+						</li>
+						
+						<li>
+							<%= link_to "<i class='icon-key'></i> Wyloguj się".html_safe, users_logout_path %>
+						</li>
+					</ul>
+					<% else %>
+						Zaloguj się
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-default">
+						<li>
+							<%= link_to "<i class='icon-user'></i> Zaloguj się".html_safe, users_login_path %>
+						</li>
+						<% if session[:isboot] == 0 %>
+						<li>
+							<%= link_to "<i class='icon-key'></i> Utwórz konto".html_safe, users_create_account_path %>
+						</li>
+						<% else %>
+						<li>
+							<a href="#isBootModal" role="button" data-toggle="modal">
+							<i class='icon-key'></i> Utwórz konto
+							</a>
+						</li>
+						<% end %>
+					</ul>
+					<% end %>
+					</span>
+					
+				</li>
+				<!-- END USER LOGIN DROPDOWN -->
+				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<!--
+				<li class="dropdown dropdown-quick-sidebar-toggler">
+					<a href="javascript:;" class="dropdown-toggle">
+					<i class="icon-logout"></i>
+					</a>
+				</li>
+				-->
+				<!-- END QUICK SIDEBAR TOGGLER -->
+			</ul>
+		</div>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>

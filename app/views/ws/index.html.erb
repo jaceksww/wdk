@@ -1,0 +1,75 @@
+<% @ws_arts.each do |item| %>
+<div class="row">
+	<div class="col-md-4 blog-img blog-tag-data">
+		<% if !item['mainimage'].nil? && item['mainimage'] != '' %>
+			<%= image_tag(Rails.configuration.static_url+"images/"+item['mainimage']+".jpg",class: "img-responsive") %>
+		<% end %>
+		<ul class="list-inline">
+										<li>
+											<i class="fa fa-calendar"></i>
+											<a href="javascript:;">
+											<%= item['datecreated']['date'][0,16] %> </a>
+										</li>
+										<li>
+											<i class="fa fa-comments"></i>
+											<a href="javascript:;">
+											<%= item['countcomments'] %> </a> Komentarzy </a>
+										</li>
+									</ul>
+									<ul class="list-inline blog-tags">
+										<li>
+											<i class="fa fa-tags"></i>
+											<a href="javascript:;">
+											Blog </a>
+											<a href="javascript:;">
+											Artykuły </a>
+											<a href="javascript:;">
+											Internet </a>
+										</li>
+		</ul>
+	</div>
+	<div class="col-md-8 blog-article">
+		<h3><h2><%= link_to item['wwwtitle'], ws_path+"/w,"+item['wwwid'].to_s  %></h3>
+		<p><%= item['excerpt'].html_safe if item['excerpt'] %>...</p>
+
+	 <%= link_to "Czytaj więcej <i class='m-icon-swapright m-icon-white'></i>".html_safe, ws_path+"/w,"+item['wwwid'].to_s , class:"btn blue" %>									
+									
+	</div>
+</div>
+<hr />
+<% end %>
+
+
+<div>
+<ul class="pagination pagination-lg">
+	<% if @start.to_i != 0 %>
+	<li>
+		<a href="/ws">
+		Pierwsza strona
+		</a>
+	</li>
+	<li>
+		<a href="/ws/page/<%= @start.to_i - @limit.to_i %>">
+		<i class="fa fa-angle-left"></i> Poprzenia
+		</a>
+	</li>
+	<% end %>
+<!--
+<% for i in 0..10 %>	
+	<li>
+		<a href="javascript:;"> <%= i %> </a>
+	</li>
+<% end %>
+-->
+	<li>
+	<a href="/ws/page/<%= @start.to_i + @limit.to_i %>">
+	Następna <i class="fa fa-angle-right"></i>
+	</a>
+	</li>
+</ul>
+</div>
+
+
+
+ <% #debug @forums %>
+

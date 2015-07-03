@@ -1,0 +1,28 @@
+<ul class="inbox-nav margin-bottom-10">
+						<li class="compose-btn">
+							<a href="/messages/create" data-title="Utwórz nową" class="btn green">
+							<i class="fa fa-edit"></i> Nowa </a>
+						</li>
+						<li class="inbox <% if active == 'inbox'%>active<%end%>">
+							<a href="/messages/inbox" class="btn" data-title="Inbox">
+							Odebrane(<%=@global_messages[1]['count_unread']%>) </a>
+							<b></b>
+						</li>
+						<li class="sent <% if active == 'outbox'%>active<%end%>">
+							<a class="btn" href="/messages/outbox" data-title="Sent">
+							Wysłane </a>
+							<b></b>
+						</li>
+						<!--
+						<li class="draft">
+							<a class="btn" href="javascript:;" data-title="Draft">
+							Draft </a>
+							<b></b>
+						</li>
+						<li class="trash">
+							<a class="btn" href="javascript:;" data-title="Trash">
+							Trash </a>
+							<b></b>
+						</li>
+						-->
+					</ul>

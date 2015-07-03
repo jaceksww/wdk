@@ -1,0 +1,54 @@
+<style>
+.simg-thumb{width:50px;height:50px;}
+</style>
+<ul class="dropdown-menu-list scroller" style="height: 1000px;" data-handle-color="#637283">
+	<% @infos.each do |el| %>
+		<% if el != 'unread' %>
+		 
+		<li>
+
+			<a href="javascript:;">
+			<div class="row">
+				<div class="col-md-2">
+				<span class="time"><%= el['datecreated']['date'][0,16] %></span>
+				</div>
+				<div class="col-md-1">
+					<span class="details">
+					<% if el['type'] == 'BLOG' %> 
+						<a href="<%= el['url'] %>"><i class="fa fa-file-image-o"></i></a>
+					<% end %>
+					<% if el['type'] == 'FORUM' %> 
+						<a href="<%= el['url'] %>"><i class="fa fa-comments-o"></i></a>
+					<% end %>
+					<% if el['type'] == 'POCZTA' %> 
+						<a href="<%= el['url'] %>"><i class="fa fa-envelope-open"></i></a>
+					<% end %>
+					</span>
+				</div>
+				<div class="col-md-1">
+					
+					
+					<span class="details">
+						<span class="photo">
+						<%= render ('layouts/avatar'), avatar: el['authoravatar'], additionalclass: 'img-responsive img-circle' %>
+						</span>
+					</span>
+				</div>
+				<div class="col-md-5">
+				<span class="label label-sm label-icon label-success">
+				</span>
+				<% if el['new'] == 1 %>
+				<strong><%= el['content'].html_safe %></strong>
+				<% else %>
+				<%= el['content'].html_safe %>
+				<% end %>
+				</div>
+				<div class="col-md-3">
+				 (<%= el['type'] %>). 
+				 </div>
+			</div>
+			</a>
+		</li>
+		<% end %>
+	<% end %>
+</ul>

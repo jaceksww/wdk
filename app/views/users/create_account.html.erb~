@@ -1,0 +1,4 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/login' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+ <%= render 'layouts/register_popup' %>

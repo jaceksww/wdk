@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
+Version: 3.9.0
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8"/>
+<title>Wędkarstwo - Portal wędkarski Logowanie/Rejestracja</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<%= render( 'layouts/css_scripts' ) %>
+
+<!-- END THEME STYLES -->
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+
+<!-- BEGIN HEADER -->
+<%= render('layouts/header') %>
+<!-- END HEADER -->
+
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+<div class="menu-toggler sidebar-toggler">
+</div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+<!-- BEGIN LOGO -->
+<div class="logo">
+	<a href="/">
+	<!--<img src="../../assets/admin/layout/img/logo-big.png" alt=""/>-->
+	</a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+	<!-- BEGIN LOGIN FORM -->
+    
+					<% if flash[:notice] %>
+					  <div class="Metronic-alerts alert alert-info fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:notice].html_safe %>
+					  </div>
+					<% end %>
+					<% if flash[:error] %>
+					  <div class="Metronic-alerts alert alert-danger fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:error].html_safe %>
+					  </div>
+					<% end %>
+					<% if flash[:success] %>
+					  <div class="Metronic-alerts alert alert-success fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:success].html_safe %>
+					  </div>
+					<% end %>
+					<% if flash[:warning] %>
+					  <div class="Metronic-alerts alert alert-warning fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:warning].html_safe %>
+					  </div>
+					<% end %>
+						
+					<%= yield %>
+	
+	
+</div>
+<div class="copyright">
+	 2014 © Metronic. Admin Dashboard Template.
+</div>
+<!-- END LOGIN -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<%= render( 'layouts/js_scripts' ) %>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,116 @@
+<% url = request.path_info %>
+ 
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<%= javascript_include_tag '/assets/global/plugins/respond.min' %>
+<%= javascript_include_tag '/assets/global/plugins/excanvas.min' %>
+<![endif]-->
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<%= javascript_include_tag '/assets/global/plugins/jquery.min' %>
+<%= javascript_include_tag '/assets/global/plugins/jquery-migrate.min' %>
+<%= javascript_include_tag '/assets/global/plugins/jquery-ui/jquery-ui.min' %>
+<%= javascript_include_tag '/assets/global/plugins/bootstrap/js/bootstrap.min' %>
+<%= javascript_include_tag '/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min' %>
+<%= javascript_include_tag '/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min' %>
+<%= javascript_include_tag '/assets/global/plugins/jquery.blockui.min' %>
+<%= javascript_include_tag '/assets/global/plugins/jquery.cokie.min' %>
+<%= javascript_include_tag '/assets/global/plugins/uniform/jquery.uniform.min' %>
+<%= javascript_include_tag '/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min' %>
+<!-- END CORE PLUGINS -->
+<%= javascript_include_tag '/assets/global/scripts/metronic' %>
+<%= javascript_include_tag '/assets/admin/layout/scripts/layout' %>
+<!--<%= javascript_include_tag '/assets/admin/layout/scripts/quick-sidebar' %>-->
+<!--<%= javascript_include_tag '/assets/admin/layout/scripts/demo' %>-->
+
+<%= javascript_include_tag '/js/scripts' %>
+
+<script>
+jQuery(document).ready(function() {    
+   Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+//QuickSidebar.init(); // init quick sidebar
+//Demo.init(); // init demo features
+});
+</script>
+
+<%= javascript_include_tag '/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min' %>
+<%= javascript_include_tag '/assets/admin/pages/scripts/components-pickers' %>
+
+<script>
+jQuery(document).ready(function() {    
+  //ComponentsPickers.init();
+  if (jQuery().datepicker) {
+            $('.date-picker').datepicker({
+                rtl: Metronic.isRTL(),
+                format: 'yyyy-mm-dd',
+                orientation: "left",
+                autoclose: true
+            });
+            //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+        }
+});
+</script>
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<%= javascript_include_tag '/assets/global/plugins/jquery-mixitup/jquery.mixitup.min' %>
+<%= javascript_include_tag '/assets/global/plugins/fancybox/source/jquery.fancybox.pack' %>
+<%= javascript_include_tag '/assets/admin/pages/scripts/portfolio' %>
+<!-- END PAGE LEVEL PLUGINS -->
+<script>
+jQuery(document).ready(function() {    
+   Portfolio.init();
+});
+</script>
+
+<%= javascript_include_tag '/assets/admin/pages/scripts/ui-alert-dialog-api' %>
+
+<script>
+        jQuery(document).ready(function() {       
+        
+           UIAlertDialogApi.init();
+        });
+    </script>
+
+
+<%= javascript_include_tag '/assets/admin/pages/scripts/form-fileupload' %>
+<script>
+        jQuery(document).ready(function() {
+        FormFileUpload.init();
+        });
+    </script>
+    
+<% if url.include?('messages/create') %>
+<%= javascript_include_tag '/assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0' %>
+<%= javascript_include_tag '/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5' %>
+<script>
+jQuery(document).ready(function() {       
+	var handleWysihtml5 = function () {
+        if (!jQuery().wysihtml5) {
+            return;
+        }
+
+        if ($('.wysihtml5').size() > 0) {
+            $('.wysihtml5').wysihtml5({
+                "stylesheets": ["../../assets/global/plugins/bootstrap-wysihtml5/wysiwyg-color.css"]
+            });
+        }
+    }
+
+            handleWysihtml5();
+    
+    
+});
+</script>
+<% end %>
+
+<!-- BEGIN GOOGLE RECAPTCHA -->
+<script type="text/javascript">
+        var RecaptchaOptions = {
+           theme : 'custom',
+           custom_theme_widget: 'recaptcha_widget_addarticle'
+        };
+    </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LcrK9cSAAAAALEcjG9gTRPbeA0yAVsKd8sBpFpR"></script>
+<!-- END GOOGLE RECAPTCHA -->

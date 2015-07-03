@@ -1,0 +1,19 @@
+<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+	<% @global_messages.each do |el| %>
+	<% if !el['count_unread'] && !el['count_total'] %>
+		<li>
+			<a href="/messages/view/<%= el['messageid']%>">
+			<span class="photo">
+			<%= render ('layouts/avatar'), avatar: el['avatar'], additionalclass: 'img-circle' %>
+			</span>
+			<span class="subject">
+			<span class="from"><%= el['displayname'] %> </span>
+			<span class="time"><%= el['datecreated']['date'][0,16] %> </span>
+			</span>
+			<span class="message">
+			<%= el['message'][0,100] if el['message'] %> </span>
+			</a>
+		</li>
+	<% end %>
+	<% end %>
+</ul>

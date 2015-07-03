@@ -1,0 +1,52 @@
+
+<div class="portlet box blue" style="height:1200px;">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>Forum
+							</div>
+							
+						</div>
+						<div class="portlet-body" style="height:1158px;">
+							<div class="row">
+								<div class="col-md-3 col-sm-3 col-xs-3" >
+									<ul class="nav nav-tabs tabs-left">
+										
+										<% j = 0 %>
+										<% @forums.each do |item| %>
+												<li class="<% if j == 0 %> active <% else %> <% end %> ">
+													<a href="#tab_<%= item['cat']['catid'].to_s  %>" tabindex="-1" data-toggle="tab">
+													<%= item['cat']['catname']  %> </a>
+												</li>
+											<% j=j+1%>
+										<% end %>
+										
+									</ul>
+								</div>
+								<div class="col-md-9 col-sm-9 col-xs-9">
+									<div class="tab-content">
+										<% i = 0 %>
+										<% @forums.each do |item| %>
+										  <div class="tab-pane <% if i == 0 %> active <% else %> fade <% end %> " id="tab_<%= item['cat']['catid'].to_s  %>">
+										  <div class="panel-heading"><h2><%= link_to item['cat']['catname'], forums_index_path+"/"+item['cat']['catid'].to_s  %></h2></div>
+										  <div class="panel-body">
+										  <ul>
+										  <% item['subcats'].each do |item_sub| %>
+											<li><%= link_to item_sub['forumname'], forums_viewforum_path+"/"+item_sub['forumid'].to_s  %></li>
+											<span><%= item_sub['description']%></span>
+										  <% end %>
+										  </ul>
+										  </div>
+										  </div>
+										<% i=i+1 %>
+										<% end %>
+										
+									</div>
+								</div>
+							</div>
+<p class="clearfix">&nbsp;</p>
+						</div>
+
+</div>
+
+
+ <% #debug @forums %>

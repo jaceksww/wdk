@@ -1,0 +1,51 @@
+
+<div class="row mix-grid">
+
+<% @ws_galleries.each do |item| %>
+	<div class="col-md-4 col-sm-4 mix category_1">
+		<div class="mix-inner">
+			<img class="img-responsive" style="width:280px;height:210px;" src="<%= Rails.configuration.static_url %>images/<%= item['description'].gsub('JPG', 'jpg')%>" alt="">
+			<div class="mix-details">
+				<h4><%= item['excerpt'] %></h4>
+				<%= link_to '<i class="fa fa-link"></i>'.html_safe, ws_path+"/w,"+item['wwwid'].to_s, class:"mix-link"  %>
+				<a class="mix-preview fancybox-button" href="<%= Rails.configuration.static_url %>images/<%= item['description']%>" title="<%= item['countcomments']%> komentarzy,<%= item['countimages']%> zdjęć,  <%= item['countlikes']%> polubień" data-rel="fancybox-button">
+				<i class="fa fa-search"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+<% end %>
+<div class="clearfix"></div>
+<div>
+<ul class="pagination pagination-lg">
+	<% if @start.to_i != 0 %>
+	<li>
+		<a href="/ws/galerie">
+		Pierwsza strona
+		</a>
+	</li>
+	<li>
+		<a href="/ws/galerie/page/<%= @start.to_i - @limit.to_i %>">
+		 <i class="fa fa-angle-left"></i> Poprzednia
+		</a>
+	</li>
+	<% end %>
+<!--
+<% for i in 0..10 %>	
+	<li>
+		<a href="javascript:;"> <%= i %> </a>
+	</li>
+<% end %>
+-->
+	<li>
+	<a href="/ws/galerie/page/<%= @start.to_i + @limit.to_i %>">
+	Następna <i class="fa fa-angle-right"></i> 
+	</a>
+	</li>
+</ul>
+</div>
+
+
+ <% #debug @forums %>
+</div>

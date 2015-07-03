@@ -1,0 +1,130 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag  '/assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min' %>
+<%= stylesheet_link_tag  '/assets/global/plugins/jquery-file-upload/css/jquery.fileupload' %>
+<%= stylesheet_link_tag  '/assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+	<%= form_tag( ws_addarticle_path,id:'addarticle', :authenticity_token => true, method: "post", multipart: true, class: "login-form") do %>
+		<div class="form-body">
+	        <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                Enter any username and password. </span>
+            </div>
+            <%= hidden_field_tag(:addArticle, "1") %>
+			<%= hidden_field_tag(:addPhotosRedirect, "0") %>
+            <input type="hidden" value="<%= @ws_www['0']['wwwid'] if !@ws_www.nil? %>" name="addarticle_wwwid" />
+						
+          	<div class="form-group form-md-line-input">
+					<div class="portlet-title">
+							<div class="caption font-green-haze">
+								<i class="icon-settings font-green-haze"></i>
+								<span class="caption-subject bold uppercase"> Opis</span>
+							</div>
+					</div>
+					<div class="form-group form-md-line-input has-info">
+							<select class="form-control addimage_gallery" name="addarticle_wwwwcategory"  id="addarticle_category" >
+								<% @ws_categories.each do |el| %>
+									<%  selected ='' %>
+									<%  selected = 'selected' if (@ws_www.nil? && el['id'] == 8) || (!@ws_www.nil? && el['id'] == @ws_www['0']['categoryId'])  %>
+									<option value="<%= el['id']%>" <%= selected %>><%= el['name']%></option>
+								<% end %>
+							</select>
+							<label for="addarticle_category">Tematyka</label>
+					</div>
+					
+					
+					<div class="form-group form-md-line-input">
+						<input type="text" class="form-control" value="<%= @ws_www['0']['wwwtitle'] if !@ws_www.nil? %>" name="addarticle_wwwtitle" id="addarticle_wwwtitle">
+						<label for="addarticle_wwwtitle">Tytuł artykułu</label>
+						<span class="help-block">Wpisz temat artykułu...</span>
+					</div>			
+									
+					<div class="form-group form-md-line-input">
+										<textarea class="form-control" rows="3" name="addarticle_description" id="addarticle_description" ><%= @ws_www['0']['description'] if !@ws_www.nil?  %></textarea>
+										<label for="form_control_1">Teść artykułu</label>
+										<span class="help-block">Opisz dokładniej co masz na myśli...</span>
+					</div>
+				
+			</div>
+			
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						<%= image_tag(Rails.configuration.static_url+"thumbs/"+@ws_www['0']['mainimage'], class:'thumbnail') if !@ws_www.nil? && !@ws_www['0']['mainimage'].nil?  %>
+						
+										
+						&nbsp;<span class="btn green btn-lg fileinput-button">
+										<i class="fa fa-plus"></i>
+										<span>
+										Zdjęcie główne... </span>
+										<input type="file" name="addarticle_mainimage" id="addarticle_mainimage">
+										</span>
+					  
+					</div>
+				</div>
+				<div class="col-md-2">
+					dodatkowo dodaj galerię
+				</div>
+				<div class="col-md-5">
+					
+							<select class="form-control addimage_gallery" id="addarticle_gallery2" name="addarticle_gallery2">
+								<option value="">---</option>
+								<% @user_galleries.each do |el| %>
+									<% selected = '' %>
+									<% selected = 'selected' if !@ws_www.nil? && el['galleryid'].to_i == @ws_www['0']['gallerycat'].to_i  %>
+									
+									<option <%= selected %> value="<%= el['galleryid']%>"><%= el['galleryname']%></option>
+								<% end %>
+							</select>
+							<a href="#addGalleryModal" role="button" data-toggle="modal">
+								<i class="fa fa-plus"></i> Dodaj nową Galerię										
+							</a>
+				</div>
+			
+			</div>
+			
+			
+			
+             <%= submit_tag("Zapisz", name:'commit',class:"btn btn-success uppercase addarticle_submit") %>
+			 <%= submit_tag("Zapisz i przejdź do dodawania zdjęć", name:'commit_add_photos', style:"display:none",class:"btn btn-default btn-xs addarticle_submit", id:"commit_add_photos") %>
+			<div id="responseaddarticle"></div>
+		</div>
+	<% end %>
+<script>	
+	jQuery(function($) {
+		$('#commit_add_photos').on('click',function(){
+			$('#addPhotosRedirect').val(1);
+		});
+		
+		$('#addarticle_gallery2').on('change',function(){
+			
+			if($('#addarticle_gallery2').val() != ""){
+				$('#commit_add_photos').show();
+			}else{
+				$('#commit_add_photos').hide();
+			}
+		});
+		$("#addarticle").submit(function(){
+				$('.addarticle_submit').attr('disabled', 'disabled');
+				$('.addarticle_submit').css('cursor','wait');
+				$('.addarticle_submit').val('ładuję...');
+		});
+		
+		 //https://github.com/rails/jquery-ujs/wiki/ajax
+		$("#addarticle")
+		.bind("ajax:send", function(){
+			$("#responseaddarticle").html('ładuję...');
+			})
+		  .bind("ajax:complete", function(){
+			$("#responseaddarticle").html('wczytane...');
+				
+			})
+		  .bind("ajax:success", function(xhr, data, status) {
+				$("#responseaddarticle").html('');
+				//setTimeout(function(){
+				//$("#addGalleryModal").modal('hide');
+				//},1000)
+		  });
+	  });
+</script>

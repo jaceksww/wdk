@@ -1,0 +1,109 @@
+	<%= form_tag( forums_addreply_path, method: "post", multipart: true, id:'addpost_form', class: "login-form") do %>
+		<input name="topicID" id="topicID" type="hidden" class="form-control">
+		<div class="form-body">
+	        <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                Enter any username and password. </span>
+            </div>
+            <%= hidden_field_tag(:addPost, "1") %>
+            
+			
+			
+          	<div class="form-group form-md-line-input">
+					<div class="portlet-title">
+							<div class="caption font-green-haze">
+								<i class="icon-settings font-green-haze"></i>
+								<span class="caption-subject bold uppercase" id="addpost_displaytitle"> O czym teraz myślisz?</span>
+							</div>
+					</div>
+					<div class="form-group form-md-line-input">
+										<textarea name="body" class="form-control" rows="3"></textarea>
+										<label for="form_control_1">Teść posta...</label>
+										<span class="help-block">Opisz dokładniej co masz na myśli...</span>
+					</div>
+					<div class="form-group">
+						&nbsp;<span class="btn green btn-lg fileinput-button">
+										<i class="fa fa-plus"></i>
+										<span>
+										Wybierz zdjęcie... </span>
+										<input type="file" name="image">
+										</span>
+					  
+					</div>
+							
+					<div class="md-checkbox-inline">
+						<div class="md-checkbox">
+						  
+											<input type="checkbox" id="checkboxAddTopic" name="addTopic" value="1" class="md-check">
+											<label for="checkboxAddTopic">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span>
+											Dodaj jako nowy wątek na forum </label>
+							
+						</div>
+					</div>
+					<div id="boxAddTopic" style="display:none">
+						<div class="form-group form-md-line-input has-info">
+											<select name="catID" class="form-control" id="addpost_catid">
+												<% @forum_categories.each do |el| %>
+													<option <%= 'selected' if el['cat']['default'] %> value="<%= el['cat']['catid']%>"><%= el['cat']['catname']%></option>
+												<% end %>
+											</select>
+											
+											<% @forum_categories.each do |el| %>
+												<div class="addpost_box" id="addpost_box_cat_<%= el['cat']['catid']%>"" style="display:<% if el['cat']['default'] %> block <% else %> none <% end %>">
+													<select name="forumID[<%= el['cat']['catid']%>]" class="form-control" id="addpost_forumid_<%= el['cat']['catid']%>">
+														<% el['subcats'].each do |el_sub| %>
+														<option <%= 'selected' if el_sub['default'] %> value="<%= el_sub['forumid']%>"><%= el_sub['forumname']%></option>
+														<% end %>
+													</select>
+												</div>
+											<% end %>
+											
+											<label for="form_control_1">Wybierz tematykę...</label>
+											
+						</div>
+						
+						<div class="form-group form-md-line-input">
+											<input name="topicTitle" type="text" class="form-control" id="addpost_topictitle">
+											<label for="adpost_topictitle">Tytuł wątku...</label>
+											<span class="help-block">Wpisz temat wątku np "Co sądzicie o mojej przynęcie?"...</span>
+						</div>			
+					</div>		
+					
+				
+			</div>
+			
+			<!-- BEGIN REPCAPTCHA -->
+				<div id="recaptcha_widget_addpost" class="form-recaptcha">
+					<div class="input-group" style="width: 325px">
+						<div class="g-recaptcha" data-sitekey="6LcZeAgTAAAAAHVgcQskv1v4JzDCDcaodKVZK2Yd"></div>
+					</div>
+				</div>
+			<!-- END REPCAPTCHA -->
+			
+			
+			
+             <%= submit_tag("Potwierdź", id:'addpost_submit',class:"btn btn-success uppercase") %>
+		</div>
+	<% end %>
+    <script>	
+	jQuery(function($) {
+		
+		$('#addpost_catid').on('change',function(){
+			$('.addpost_box').hide();
+			var catActive = $('#addpost_catid').val();
+			$('#addpost_box_cat_'+catActive).show();
+			
+		});
+		$("#addpost_form").submit(function(){
+				$('#addpost_submit').attr('disabled', 'disabled');
+				$('#addpost_submit').css('cursor','wait');
+				$('#addpost_submit').val('ładuję...');
+			
+		});
+		
+	  });
+</script>

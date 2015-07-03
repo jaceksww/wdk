@@ -1,0 +1,9 @@
+<% @pages.each do |item| %>
+  <h1><%= item['pagename'] %></h1>
+  <% if item['mainimage'] != "" %>
+    <%= image_tag(Rails.configuration.static_url+'images/'+item['mainimage']) %>
+  <% end %>
+  <%= item['body'].html_safe %>
+  <hr />
+<% end %>
+<% #debug @pages %>

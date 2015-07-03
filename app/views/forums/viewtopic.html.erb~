@@ -1,0 +1,58 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/blog' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<div class="blog-page">
+<div class="row">
+<div class="article-block">
+<div class="media">
+<br />
+<% if session[:isboot] == 0 %>
+	<a href="#addPostModal" role="button" id="addPostReply" class="btn green btn-lg" data-topictitle="<%= @forums_posts[0]['topictitle']%>" data-topicid="<%= @forums_posts[0]['topicid']%>" data-toggle="modal">
+<% else %>
+		<a href="#isBootModal" class="btn green btn-lg" role="button" data-toggle="modal">
+<% end %>
+	 Odpowiedz
+</a>
+	<h3><%= @forums_posts[0]['topictitle']%></h3>
+	<% if @forums_posts %>
+	  <% @forums_posts.each do |item| %>
+		<div class="media">
+			<a href="javascript:;" class="pull-left">
+			<% if !item['avatar'].nil? %>
+			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="media-object">
+			<% else %>
+			<img alt="" src="../../assets/admin/pages/media/blog/5.jpg" class="media-object">
+			<% end %>
+			</a>
+			<div class="media-body">
+				<h4 class="media-heading"><%= item['displayname'] %> <span>
+				<%= item['datecreated']['date'][0,16]  %> / <a href="javascript:;">
+				Dodaj notatkę do tego posta </a>
+				</span>
+				</h4>
+				<p>
+					 <%= item['body'].html_safe  %>
+				</p>
+			</div>
+		</div>
+		<!--end media-->
+		<hr />
+	  <% end %>
+	<% else %>
+	  Brak postów
+	<% end %>
+</div>
+</div>
+</div>
+</div>
+<script>
+	jQuery(function($) {
+		
+		$("#addPostReply").click(function(){
+				$('#addpost_form #topicID').val($(this).data('topicid'));
+				$('#addpost_displaytitle').text($(this).data('topictitle'));
+		});
+		
+	  });
+</script>

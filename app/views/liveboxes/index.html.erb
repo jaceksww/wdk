@@ -1,0 +1,300 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/news' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+<style>
+	 .livebox-badge{padding:4px 8px;font-size:15px;color:#fff;background:#1caf9a;position:absolute;left:-14px;top:-14px;}
+</style>
+<%= render('layouts/home_add_buttons') %>
+					<hr />
+<div class="row">
+<div class="col-md-12 news-page">
+
+<% for i in 1..2 %>
+	 
+	 <div class="col-md-6">
+	 <% j=0 %>
+	 <% @liveboxes.each do |item| %>
+	 
+	 <% j += 1 %>
+	 
+	 <% next if i == 1 && j % 2 == 0 %>
+	 <% next if i == 2 && j % 2 == 1 %>
+	 
+	 <% if  j==5 || j == 16 %>
+	 	<div class="news-blocks">
+	 	<!--REKLAMA-->
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- ror-wedkarstwo.mobi -->
+					<ins class="adsbygoogle"
+						 style="display:block"
+						 data-ad-client="ca-pub-6785867565338897"
+						 data-ad-slot="6923507765"
+						 data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					<!--eof REKLAMA-->
+		</div>
+	 <% end %>
+	 
+		  <% if item['type'] == 'WWW' %>
+								  
+		  <div class="top-news">
+				<a href="/ws/w,<%= item['wwwid'] %>" class="btn red">
+				<span>"<%= item['displayname'] %>" dodał artykuł na blogu. <br />"<%= item['wwwtitle']%>"</span>
+				<em>
+				<i class="fa fa-tags"></i>
+				dnia  <%= item['datecreated']['date'].at(0..15) %>
+				<i class="fa fa-comments"></i> <%= item['countcomments'] %> 
+				<i class="fa fa-image"></i> <%= item['countimages'] %>
+				</em>
+				<i class="fa fa-file-image-o top-news-icon"></i>
+				</a>
+				
+		  </div>
+		  <div class="news-blocks">
+								   <% if item['mainimage'] %>
+								     <p>
+								     <a href="/ws/w,<%= item['wwwid'] %>">
+								     <% if item['mainimage'].index("jpg") || item['mainimage'].index("png") || item['mainimage'].index("gif")  %>
+									 <%= image_tag(Rails.configuration.static_url+"images/"+item['mainimage'], :style=>'width:100%') %>
+									 <% else %>
+									 <%= image_tag(Rails.configuration.static_url+"images/"+item['mainimage']+".jpg", :style=>'width:100%') %>
+									 <% end %>
+									 </a>
+									 </p>
+								   <% end %>
+								    
+								   <%= item['excerpt'].html_safe %>
+								   <div class="clearfix"></div>
+									 
+			   <a href="/ws/w,<%= item['wwwid'] %>" class="news-block-btn">
+				Czytaj całość <i class="m-icon-swapright m-icon-black"></i>
+				</a>
+								   
+		  </div>
+		  <% elsif item['type'] == 'WS_COMMENT' %>
+		  <div class="top-news">
+				<a href="/ws/w,<%= item['wwwid'] %>" class="btn yellow">
+			   <span>"<%= item['displayname'] %>" dodał komentarz do artykułu<br />
+				<%= item['wwwtitle'] %>
+				</span>
+				<em>
+				<i class="fa fa-tags"></i>
+				dnia  <%= item['datecreated']['date'].at(0..15) %>
+				<i class="fa fa-comments"></i> <%= item['countcomments'] %> 
+				</em>
+				<i class="fa fa-comment-o top-news-icon"></i>
+				</a>
+		  </div>
+								  
+								  
+		  <div class="news-blocks">
+								   <% if item['description'].include?('.jpg') || item['description'].include?('.png') || item['description'].include?('.gif') %>
+								     <p>
+								     <a href="/ws/w,<%= item['wwwid'] %>">
+										<%= image_tag(Rails.configuration.static_url+"images/"+item['description'], class: "news-block-img img-circle pull-right") %> 
+									 </a>
+									 </p>
+								   <% end %>
+								   <%= item['comment'].html_safe %>
+								   <div class="clearfix"></div>
+									 
+			   <a href="/ws/w,<%= item['wwwid'] %>" class="news-block-btn">
+				Czytaj całość <i class="m-icon-swapright m-icon-black"></i>
+			   </a>
+			   <% # render('layouts/ws/comments_form', wwwid: item['wwwid'] )%>
+		  </div>
+								   
+		  <% elsif item['type'] == 'GALERIA' %>
+		  <div class="top-news">
+				<a href="/ws/w,<%= item['wwwid'] %>" class="btn green">
+				<span>"<%= item['displayname'] %>" dodał zdjęcie do alerii<br />
+				<%= item['wwwtitle'] %>
+				</span>
+				<em>
+				<i class="fa fa-tags"></i>
+				dnia  <%= item['datecreated']['date'].at(0..15) %>
+				<i class="fa fa-comments"></i> <%= item['countcomments'] %> 
+				</em>
+				<i class="fa fa-camera top-news-icon"></i>
+				</a>
+		  </div>
+								  
+								  
+		  <div class="news-blocks">
+								   <% if item['description'].include?('.jpg') || item['description'].include?('.png') || item['description'].include?('.gif') %>
+								     <p>
+								     <a href="/ws/w,<%= item['wwwid'] %>">
+										<%= image_tag(Rails.configuration.static_url+"images/"+item['description'], class: "img-responsive") %> 
+									 </a>
+									 </p>
+								   <% end %>
+								   <%= item['excerpt'].html_safe if item['excerpt'] %>
+								   <div class="clearfix"></div>
+									 
+			   <a href="/ws/w,<%= item['wwwid'] %>" class="news-block-btn">
+				Czytaj całość <i class="m-icon-swapright m-icon-black"></i>
+			   </a>
+		  </div>
+		  <% elsif item['type'] == 'REJESTR' %>
+		  <div class="top-news">
+				<a href="/ws/w,<%= item['wwwid'] %>" class="btn green">
+				<% if item['parentid'] == 0 %>
+				<span>"<%= item['displayname'] %>" dodał łowisko do "Rejestru połowów"<br />
+			   <% else %>
+			   <span>"<%= item['displayname'] %>" dodał rybę do "Rejestru połowów" do artykułu<br />
+			   <% end %>
+			   
+				</span>
+				<em>
+				<i class="fa fa-tags"></i>
+				dnia  <%= item['datecreated']['date'].at(0..15) %>
+				<i class="fa fa-comments"></i> <%= item['countcomments'] %> 
+				</em>
+				<i class="fa fa-camera top-news-icon"></i>
+				</a>
+		  </div>
+								  
+								  
+		  <div class="news-blocks">
+			   <% if !item['description'].nil? && (item['description'].include?('.jpg') || item['description'].include?('.png') || item['description'].include?('.gif') ) %>
+					<p>
+					<%= image_tag(Rails.configuration.static_url+"images/"+item['description'].gsub('JPG', 'jpg'), class: "news-block-img img-circle pull-right") %> 
+					</p>
+			   <% end %>
+			   
+			   <% if item['parentid'] == 0 %>
+					<strong><%= item['description2'].html_safe %></strong>
+					<br /><%= item['excerpt'].html_safe if item['excerpt'] %>
+			   <% else %>
+					<strong>Ryba: <%= item['fishname'] %></strong>
+					<br />
+					Przynęta: <%= item['bite'] %> 
+					<br />
+					Ilość: <%= item['qtty'] %> szt
+					<br />
+					Waga: <%= item['weight'] %> kg
+					<br />
+					Długość: <%= item['length'] %>cm
+			   <% end %>
+								   <div class="clearfix"></div>
+									 
+			   <a href="/ws/w,<%= item['wwwid'] %>" class="news-block-btn">
+				Czytaj całość <i class="m-icon-swapright m-icon-black"></i>
+			   </a>
+		  </div>
+		  <% elsif item['type'] == 'FORUM_TOPIC' %>
+		  <div class="top-news">
+				<a href="/forums/viewtopic/<%= item['topicid'] %>" class="btn blue">
+				<span>"<%= item['displayname'] %>" dodał temat na forum<br />
+				<%= item['topictitle'] %>
+				</span>
+				<em>
+				<i class="fa fa-tags"></i>
+				dnia  <%= item['datecreated']['date'].at(0..15) %>
+				<i class="fa fa-comments"></i> <%= item['replies'] %> 
+				</em>
+				<i class="fa fa-bars top-news-icon"></i>
+				</a>
+		  </div>
+								  
+								  
+		  <div class="news-blocks">
+			   <%= item['topictitle'].html_safe %>
+			   <div class="clearfix"></div>
+									 
+			   <a href="/forums/viewtopic/<%= item['topicid'] %>" class="news-block-btn">
+				Czytaj całość <i class="m-icon-swapright m-icon-black"></i>
+			   </a>
+		  </div>
+		  <% elsif item['type'] == 'FORUM_POST' %>
+		  <div class="top-news">
+				<a href="/forums/viewtopic/<%= item['topicid'] %>" class="btn blue">
+				<span>"<%= item['displayname'] %>" dodał post na forum do tematu:<br />
+				"<%= item['topictitle'] %>"
+				</span>
+				<em>
+				<i class="fa fa-tags"></i>
+				dnia  <%= item['datecreated']['date'].at(0..15) %>
+				<i class="fa fa-comments"></i> <%= item['replies'] %> 
+				</em>
+				<i class="fa fa-comments-o top-news-icon"></i>
+				</a>
+		  </div>
+								  
+								  
+		  <div class="news-blocks">
+			   <% if item['image'] && item['image'] != "" %>
+					<p>
+					<%= image_tag(Rails.configuration.static_url+"static/uploads/"+item['image'], class: "news-block-img img-circle pull-right") %> 
+					</p>
+			   <% end %>
+			   <%= item['body'].html_safe %>
+			   <div class="clearfix"></div>
+									 
+			   <a href="/forums/viewtopic/<%= item['topicid'] %>" class="news-block-btn">
+				Czytaj całość <i class="m-icon-swapright m-icon-black"></i>
+			   </a>
+		  </div>
+		  <% else %>
+          <div class="top-news">
+				<a href="javascript:;" class="btn blue">
+				<span><%= item['type'] %></span>
+				<em>
+				<i class="fa fa-tags"></i>
+				( dodał <%= item['displayname'] %> ) </em>
+				<i class="fa fa-comments-o top-news-icon"></i>
+				</a>
+		  </div>
+          <div class="news-blocks">
+                                    <% if item['mainimage'] %>
+									<p>
+									 <%= image_tag(item['mainimage'], :class=>'news-block-img pull-right') %>
+									 </p>
+                                    <% end %>
+                                    <%= item['body'].html_safe %>
+                                    <div class="clearfix"></div>
+                                      
+			   <a href="page_news_item.html" class="news-block-btn">
+				Read more <i class="m-icon-swapright m-icon-black"></i>
+				</a>
+          </div>
+          <% end %>
+	 
+	 <% end %>
+	 
+	 </div>
+<% end %>
+</div>                     
+</div><!--/row-->
+
+<div class="clearfix"></div>
+<div>
+<ul class="pagination pagination-lg">
+	<% if @start.to_i != 0 %>
+	<li>
+		<a href="/">
+		Najnowsze..
+		</a>
+	</li>
+	<li>
+		<a href="/page/<%= @start.to_i - 4 %>">
+		 <i class="fa fa-angle-left"></i> Poprzedni miesiąc
+		</a>
+	</li>
+	<% end %>
+<!--
+<% for i in 0..10 %>	
+	<li>
+		<a href="javascript:;"> <%= i %> </a>
+	</li>
+<% end %>
+-->
+	<li>
+	<a href="/page/<%= @start.to_i + 4 %>">
+	Kolejny miesiąc <i class="fa fa-angle-right"></i> 
+	</a>
+	</li>
+</ul>
+</div>

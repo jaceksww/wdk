@@ -1,0 +1,181 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min' %>
+
+<!-- END PAGE LEVEL SCRIPTS -->
+
+
+<%= form_tag( ws_addimage_path,id:'addimage', method: "post", multipart: true, class: "login-form") do %>
+		<div class="form-body">
+	        <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                Enter any username and password. </span>
+            </div>
+            <%= hidden_field_tag(:addImage, "1") %>
+            
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						&nbsp;<span class="btn green btn-lg fileinput-button">
+										<i class="fa fa-plus"></i>
+										<span>
+										Wybierz zdjęcie... </span>
+										<input type="file" name="image">
+										</span>
+					  
+					</div>
+				</div>
+				<div class="col-md-2">
+					dodaj do galerii
+				</div>
+				<div class="col-md-5">
+							<select name="addarticle_gallery" id="addimage_gallery" class="form-control addimage_gallery" >
+								<% @user_galleries.each do |el| %>
+									<% selected = '' %>
+									<% selected = 'selected' if @galleryid != 0 && el['galleryid'].to_i == @galleryid.to_i  %>
+									
+									<option <%= selected %> value="<%= el['galleryid']%>"> <%= el['galleryname']%></option>
+								<% end %>
+							</select>
+							<a href="#addGalleryModal" role="button" data-toggle="modal">
+								<i class="fa fa-plus"></i> Dodaj nową Galerię										
+							</a>
+				</div>
+			</div>
+          	<div class="form-group form-md-line-input">
+					<div class="portlet-title">
+							<div class="caption font-green-haze">
+								<i class="icon-settings font-green-haze"></i>
+								<span class="caption-subject bold uppercase"> Opis</span>
+							</div>
+					</div>
+										
+					<textarea rows="3" name="excerpt" class="form-control" id="form_control_1" placeholder="Opis zdjęcia..."></textarea>
+					<div class="form-control-focus">
+					</div>
+				
+			</div>
+			
+			
+			<div class="form-group form-md-checkboxes">
+			
+					<div class="portlet-title">
+							<div class="caption font-green-haze">
+								<i class="icon-settings font-green-haze"></i>
+								<span class="caption-subject bold uppercase"> Jakie ryby są na zdjęciu?</span>
+							</div>
+					</div>
+					
+					<div class="md-checkbox-inline">
+					<% @subjects.each do |el| %>
+						<div class="md-checkbox">
+						  <div style="width:140px;">
+											<input type="checkbox" id="checkbox<%=el['ref']%>" name="subject[]" value="<%=el['ref']%>" class="md-check">
+											<label for="checkbox<%=el['ref']%>">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span>
+											<%=el['name']%> </label>
+							</div>
+						</div>
+					<% end %>
+					</div>
+				
+			</div>
+			
+			<div class="md-checkbox-inline">
+						<div class="md-checkbox">
+						  
+											<input type="checkbox" id="checkboxAddRejestr" name="addTopic" value="1" class="md-check">
+											<label for="checkboxAddRejestr">
+											<span></span>
+											<span class="check"></span>
+											<span class="box"></span>
+											Dodaj do swojego rejestru połowów </label>
+							
+						</div>
+			</div>
+			<div id="boxAddRejestr" style="display:none">
+				<div class="form-group form-md-line-input has-info">
+					<select name="parentID" class="form-control" id="addimage_register_fisheries">
+						<% @rejestr_lowisko.each do |el| %>
+							<option value="<%= el['wwwid']%>"><%= el['description2']%></option>
+						<% end %>
+					</select>
+					<label for="form_control_1">Łowisko</label>
+					<a href="#addRejestrLowiskoModal" role="button" data-toggle="modal">
+						<i class="fa fa-plus"></i> Dodaj nowe Łowisko										
+					</a>
+				</div>
+				
+				<!--
+				<div class="form-group form-md-line-input">
+						<input type="text" class="form-control" id="form_control_1">
+						<label for="form_control_1">Nazwa łowiska...</label>
+						<span class="help-block">Wpisz nazwe nowego łowiska...</span>
+				</div>
+				-->
+				
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group form-md-line-input">
+											<input id="addimage_date" name="dateCreated" class="form-control form-control-inline input-medium date-picker" size="10" type="text" placeholder="yyyy-mm-dd" value=""/>
+											<label for="addimage_date">Data połowu:</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group form-md-line-input ">
+											<select class="form-control" name="subject2" id="addimage_register_bites">
+												<% @subjects2.each do |el| %>
+													<option value="<%= el['ref']%>"><%= el['name']%></option>
+												<% end %>
+											</select>
+											<label for="addimage_register_bites">Przynęta:</label>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group form-md-line-input has-success">
+											<input type="text" class="form-control" name="custom1" id="addimage_register_qtty" placeholder="ilość...">
+											<div class="form-control-focus">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group form-md-line-input has-warning">
+											<input type="text" class="form-control" name="custom2" id="addimage_register_weight" placeholder="kg...">
+											<div class="form-control-focus">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group form-md-line-input has-info">
+											<input type="text" class="form-control" name="custom3" id="addimage_register_length" placeholder="cm...">
+											<div class="form-control-focus">
+											</div>
+										</div>
+									</div>
+									
+								</div>
+						
+			</div>
+			
+             <%= submit_tag("Potwierdź",id:'addimage_submit', class:"btn btn-success uppercase") %>
+		</div>
+	<% end %>
+<script>
+	jQuery(function($) {
+		
+		$("#addimage").submit(function(){
+				$('#addimage_submit').attr('disabled', 'disabled');
+				$('#addimage_submit').css('cursor','wait');
+				$('#addimage_submit').val('ładuję...');
+			
+		});
+		
+	  });
+</script>
+	  

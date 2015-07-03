@@ -1,0 +1,14 @@
+<% @pages.each do |item| %>
+  
+<div class="panel-heading"><h1><%= item['pagename'] %></h1></div>
+<div class="panel panel-default">
+ 
+  <div class="panel-body">
+  <% if item['mainimage'] != "" %>
+    <%= image_tag(Rails.configuration.static_url+'images/'+item['mainimage']) %>
+  <% end %>
+  <%= sanitize(item['body'].html_safe, :tags=>[]) %>
+  </div>
+</div>
+<% end %>
+<% #debug @pages %>

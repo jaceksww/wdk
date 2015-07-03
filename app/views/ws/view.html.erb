@@ -1,0 +1,131 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/blog' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+<div class="col-md-12 blog-page">
+					<div class="row">
+						<div class="col-md-9 article-block">
+							<% if @view_ws_www["0"]['wwwtitle'] == "GALERIA" %>
+							  	<h3><%= @view_ws_www["0"]['excerpt'].html_safe %></h3>
+							<% else %>
+								<% if @view_ws_www["0"]['wwwtitle'] == "REJESTR" %>
+									<h3><%= @view_ws_www["0"]['fishname'] %></h3>							
+								<% else %>						
+  									<h3><%= @view_ws_www["0"]['wwwtitle']%></h3>
+								<% end %>							
+							<% end %>  
+							<div class="blog-tag-data">
+								<% if @view_ws_www["0"]['wwwtitle'] == "GALERIA" || @view_ws_www["0"]['wwwtitle'] == "REJESTR" %>
+										<% if @view_ws_www["0"]['description'] != "" %>
+										  <center>
+										  <%= image_tag(Rails.configuration.static_url+"images/"+@view_ws_www["0"]['description'].gsub('JPG', 'jpg') ,class: "img-responsive") %>
+										  </center>
+										  <p class="clearfix">&nbsp;</p>
+										<% end %>
+								<% else %>
+										<% if !@view_ws_www["0"]['mainimage'].nil? && @view_ws_www["0"]['mainimage'] != "" %>
+										  <center>
+										  <%= image_tag(Rails.configuration.static_url+"images/"+@view_ws_www["0"]['mainimage']+".jpg",class: "img-responsive") %>
+										  </center>
+										  <p class="clearfix">&nbsp;</p>
+										<% end %>
+			
+								<% end %>
+								<% if @view_ws_www["0"]['wwwtitle'] == "REJESTR" %>
+									<% if @view_ws_www["0"]['parentid'] == 0 %>
+										<strong><%= @view_ws_www["0"]['description2'].html_safe %></strong>
+										<br /><%= @view_ws_www["0"]['excerpt'].html_safe if @view_ws_www["0"]['excerpt'] %>
+								   <% else %>
+										<strong>Ryba: <%= @view_ws_www["0"]['fishname'] %></strong>
+										<br />
+										Przynęta: <%= @view_ws_www["0"]['bite'] %> 
+										<br />
+										Ilość: <%= @view_ws_www["0"]['qtty'] %> szt
+										<br />
+										Waga: <%= @view_ws_www["0"]['weight'] %> kg
+										<br />
+										Długość: <%= @view_ws_www["0"]['length'] %>cm
+								   <% end %>
+								<% end %>
+								<div class="row">
+									<div class="col-md-6">
+										<ul class="list-inline blog-tags">
+											<li>
+												<i class="fa fa-tags"></i>
+												<a href="javascript:;">
+												Technology </a>
+												<a href="javascript:;">
+												Education </a>
+												<a href="javascript:;">
+												Internet </a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-md-6 blog-tag-data-inner">
+										<ul class="list-inline">
+											<li>
+												<i class="fa fa-calendar"></i>
+												<a href="javascript:;">
+												<%= @view_ws_www["0"]['datecreated']['date'][0,16] %>  </a>
+											</li>
+											<li>
+												<i class="fa fa-comments"></i>
+												<a href="javascript:;">
+												<%= @view_ws_www["0"]['countcomments'] %> Komentarzy </a>
+											</li>
+											<li>
+												<i class="fa fa-user"></i>
+												<a href="javascript:;"> dodał 
+												<%= @view_ws_www["0"]['displayname'] %> </a>
+											</li>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!--end news-tag-data-->
+							<div>
+								<p>
+<% if @view_ws_www["0"]['wwwtitle'] != "GALERIA" && @view_ws_www["0"]['wwwtitle'] != "REJESTR" %>
+	<%= @view_ws_www["0"]['description'] %>
+<% end %>								
+								</p>
+							</div>
+							<hr>
+							<div class="media">
+								<h3>Komentarze</h3>
+								<% if @view_ws_www["comments"] %>
+								  <% @view_ws_www["comments"].each do |item_comm| %>
+									<div class="media">
+										<a href="javascript:;" class="pull-left">
+											<% if !item_comm['avatar'].nil? %>
+											<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item_comm['avatar'] %>" class="media-object">
+											<% else %>
+											<img alt="" src="<%= Rails.configuration.default_avatar %>" class="media-object">
+											<% end %>
+										</a>
+										<div class="media-body">
+											<h4 class="media-heading"><%= item_comm['fullname'] %> <span>
+											<%= item_comm['datecreated']['date'][0,16]  %> / <a href="javascript:;">
+											Reply </a>
+											</span>
+											</h4>
+											<p>
+												 <%= item_comm['comment'].html_safe  %>
+											</p>
+										</div>
+									</div>
+									<!--end media-->
+									
+								  <% end %>
+								<% else %>
+								  Brak komentarzy
+								<% end %>
+							</div>
+							<div class="post-comment">
+								<h3>Skomentuj</h3>
+								<%= render('layouts/ws/comments_form', wwwid: @view_ws_www["0"]['wwwid'] )%>
+							</div>
+						</div>
+						<!--end col-md-9-->
+				</div>
+</div>

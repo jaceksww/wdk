@@ -1,0 +1,28 @@
+
+<%= form_tag( users_isboot_path,id:'isBoot', method: "post", class: "login-form") do %>
+		<div class="form-body">
+	        
+			<!-- BEGIN REPCAPTCHA -->
+				<div id="recaptcha_widget_addimage" class="form-recaptcha">
+					<div class="input-group" style="width: 325px">
+						<div class="g-recaptcha" data-sitekey="6LfwcQgTAAAAAKmtL0WssOqHMtxA9GIoy710jO2s"></div>
+					</div>
+				</div>
+			<!-- END REPCAPTCHA -->
+			
+             <%= submit_tag("Potwierdź",id:'isboot_submit', class:"btn btn-success uppercase") %>
+		</div>
+	<% end %>
+<script>
+	jQuery(function($) {
+		
+		$("#isBoot").submit(function(){
+				$('#isboot_submit').attr('disabled', 'disabled');
+				$('#isboot_submit').css('cursor','wait');
+				$('#isboot_submit').val('ładuję...');
+			
+		});
+		
+	  });
+</script>
+	  

@@ -1,0 +1,68 @@
+	<%= form_tag( ws_addgallery_path,id:'addgallery', :authenticity_token => true, remote:true, method: "post", multipart: true, class: "login-form") do %>
+		<div class="form-body">
+	        <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                Enter any username and password. </span>
+            </div>
+            <%= hidden_field_tag(:addGallery, "1") %>
+            
+			
+			
+          	<div class="form-group form-md-line-input">
+					<div class="portlet-title">
+							<div class="caption font-green-haze">
+								<i class="icon-settings font-green-haze"></i>
+								<span class="caption-subject bold uppercase"> Dodaj galerię</span>
+							</div>
+					</div>
+					
+					
+					<div class="form-group form-md-line-input"><input type="text" class="form-control" name="galleryName" id="addgallery_galleryname">
+										<label for="form_control_1">Nazwa galerii</label>
+										<span class="help-block">Wpisz nazwę galerii np "Zdjęcia z sezonu 2015"...</span>
+					</div>			
+					
+				
+			</div>
+			
+			<!-- BEGIN REPCAPTCHA -->
+				<div id="recaptcha_widget_addarticle" class="form-recaptcha">
+					<div class="input-group" style="width: 325px">
+						<div class="g-recaptcha" data-sitekey="6LfwcQgTAAAAAKmtL0WssOqHMtxA9GIoy710jO2s"></div>
+					</div>
+				</div>
+			<!-- END REPCAPTCHA -->
+			
+			
+             <%= submit_tag("Potwierdź", id:'addgallery_submit',class:"btn btn-success uppercase") %>
+			<div id="responseaddgallery"></div>
+		</div>
+	<% end %>
+	<script>	
+	jQuery(function($) {
+		 //https://github.com/rails/jquery-ujs/wiki/ajax
+		$("#addgallery")
+		.bind("ajax:send", function(){
+				$('#addgallery_submit').attr('disabled', 'disabled');
+				$('#addgallery_submit').css('cursor','wait');
+				$('#addgallery_submit').val('ładuję...');
+			})
+		  .bind("ajax:complete", function(){
+			$("#responseaddgallery").html('wczytane...');
+				
+			})
+		  .bind("ajax:success", function(xhr, data, status) {
+				$(".addimage_gallery").append('<option selected value="'+data.galleryid+'">'+data.galleryname+'</option>');
+				if($('#addarticle_gallery').val() != ""){
+					$('#addarticle_submit').val('Potwierdź i przejdź do dodawania zdjęć');
+				}
+				$('#addgallery_submit').attr('disabled', '');
+				$('#addgallery_submit').css('cursor','pointer');
+				$('#addgallery_submit').val('Potwierdź');
+				setTimeout(function(){
+				$("#addGalleryModal").modal('hide');
+				},1000)
+		  });
+	  });
+</script>

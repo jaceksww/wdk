@@ -1,0 +1,75 @@
+
+<%= stylesheet_link_tag    '/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5' %>
+<%= stylesheet_link_tag    '/assets/admin/pages/css/inbox' %>
+
+<div class="row inbox">
+				<div class="col-md-2">
+					<%= render ('messages/sidemenu'), active: 'inbox' %>
+				</div>
+				<div class="col-md-10">
+					
+					<div class="inbox-content">
+					<%= form_tag( messages_create_path,id:'messagecreate', :authenticity_token => true, method: "post", multipart: true, class: "inbox-compose form-horizontal") do %>
+	
+						<input type="hidden" class="form-control" name="createMessage" value="1">
+						<div class="inbox-compose-btn">
+							<button class="btn blue"><i class="fa fa-check"></i>Wyślij</button>
+							<!--
+							<button class="btn inbox-discard-btn">Discard</button>
+							<button class="btn">Draft</button>
+							-->
+						</div>
+						<div class="inbox-form-group mail-to">
+							<label class="control-label">Do: </label>
+							<div class="controls controls-to">
+								<select name="to" class="form-control" id="createmessage_to">
+									<% @users.each do |el| %>
+										<option 
+										<% if @selectuserid != 0 && @selectuserid.to_i == el['userid'].to_i %>
+											selected 
+										<% end %>
+										value="<%= el['userid']%>"><%= el['displayname']%></option>
+									<% end %>
+								</select>
+							</div>
+						</div>
+						<div class="inbox-form-group input-cc display-hide">
+							<a href="javascript:;" class="close">
+							</a>
+							<label class="control-label">Cc:</label>
+							<div class="controls controls-cc">
+								<input type="text" name="cc" class="form-control">
+							</div>
+						</div>
+						<div class="inbox-form-group input-bcc display-hide">
+							<a href="javascript:;" class="close">
+							</a>
+							<label class="control-label">Bcc:</label>
+							<div class="controls controls-bcc">
+								<input type="text" name="bcc" class="form-control">
+							</div>
+						</div>
+						<div class="inbox-form-group">
+							<label class="control-label">Temat:</label>
+							<div class="controls">
+								<input type="text" class="form-control" name="subject">
+							</div>
+						</div>
+						<div class="inbox-form-group">
+							<textarea class="inbox-editor wysihtml5 form-control" name="message" rows="12"></textarea>
+						</div>
+	
+						<div class="inbox-compose-btn">
+							<button class="btn blue"><i class="fa fa-check"></i>Wyślij</button>
+							<!--
+							<button class="btn">Discard</button>
+							<button class="btn">Draft</button>
+							-->
+						</div>
+					<% end %>
+					
+					</div>
+				</div>
+			</div>
+			
+

@@ -1,0 +1,115 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/login' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+<style>
+#setting_changepassword{display:none}
+</style>
+  <!-- BEGIN REGISTRATION FORM -->
+	<%= form_tag( users_settings_path+'/'+ @userparams['userid'].to_s, method: "post", multipart:true, id:"settings",class: "register-form") do %>
+    
+		<h3>Moje dane</h3>
+		<p class="hint">
+			 Poniżej wpisz dane nowego konta:
+		</p>
+		<!--
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Full Name</label>
+			<input class="form-control placeholder-no-fix" type="text" placeholder="Full Name" name="fullname"/>
+		</div>
+		-->
+		<div class="form-group">
+			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+			<label class="control-label visible-ie8 visible-ie9">Email</label>
+			<%= hidden_field_tag(:settings, "1") %>
+			<%= hidden_field_tag(:settings_userID, @userparams['userid']) %>
+			<%= text_field_tag(:settings_email,@userparams['email'], class: "form-control placeholder-no-fix", autofocus: "", placeholder:"Email") %>
+			  
+		</div>
+		<!--
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Address</label>
+			<input class="form-control placeholder-no-fix" type="text" placeholder="Address" name="address"/>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">City/Town</label>
+			<input class="form-control placeholder-no-fix" type="text" placeholder="City/Town" name="city"/>
+		</div>
+		-->
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Login</label>
+			<%= text_field_tag(:settings_displayname, @userparams['displayname'], id:"register_displayname", class: "form-control placeholder-no-fix",autocomplete:"off", autofocus: "", placeholder:"Login/nazwa wyświetlana") %>
+		</div>
+		<div class="form-group">
+		<% if @userparams['avatar'] %>
+			<%= image_tag(Rails.configuration.static_url+"static/uploads/avatars/"+@userparams['avatar'], class:'thumbnail')  %>
+		<% else %>
+			( Brak zdjęcia użytkownika )
+		<% end %>
+		<br />
+			<span class="btn green btn-lg fileinput-button">
+				<i class="fa fa-plus"></i>
+				<span>Zdjęcie użytkownika... </span>
+				<input type="file" name="settings_avatar" id="settings_avatar">
+			</span>
+					  
+		</div>
+		<a class="btn" id="btn_setting_changepassword" >Zmień hasło</a>
+		<div id="setting_changepassword">
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Aktualne Hasło</label>
+			
+			
+			<%= hidden_field_tag(:settings_current_password_org, @userparams['password'], id:"register_currentpassword_org") %>
+			<%= password_field_tag(:settings_current_password, "", id:"register_currentpassword", class: "form-control placeholder-no-fix",autocomplete:"off", autofocus: "", placeholder:"Obecne hasło") %>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Nowe Hasło</label>
+			<%= password_field_tag(:settings_new_password, "", id:"register_newpassword", class: "form-control placeholder-no-fix",autocomplete:"off", autofocus: "", placeholder:"Nowe hasło") %>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Powtórz nowe hasło</label>
+			<%= password_field_tag(:settings_new_password2, "", id:"register_new2password", class: "form-control placeholder-no-fix",autocomplete:"off", autofocus: "", placeholder:"Powtórz nowe hasło") %>
+		</div>
+		</div>
+		
+		<div class="form-actions">
+			<a type="button" id="register-back-btn" class="btn btn-default" href="/">Wstecz</a>
+			<a  id="settings_submit" class="btn btn-success uppercase pull-right">Zapisz zmiany</a>
+          
+		</div>
+	<% end %>
+	<!-- END REGISTRATION FORM -->
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script>
+	jQuery(function($) {
+		
+		$("#settings").submit(function(){
+				$('#settings_submit').attr('disabled', 'disabled');
+				$('#settings_submit').css('cursor','wait');
+				$('#settings_submit').val('ładuję...');
+			
+		});
+		
+		//validate
+		$('#settings_submit').click(function(){
+			if($('#register_currentpassword').val() != ''){
+				if($('#register_currentpassword_org').val() != CryptoJS.MD5($('#register_currentpassword').val()) ){
+					alert('Obecne hasło niepoprawne.');
+					return false;
+				}
+				if($('#register_newpassword').val() != $('#register_newpassword2').val() ){
+					alert('Nowe hasła nie są identyczne.');
+					return false;
+				}
+			}
+			$("#settings").submit();
+		});
+		
+		
+		$("#btn_setting_changepassword").click(function(){
+			$('#setting_changepassword').toggle();
+		})
+		
+	  });
+</script>
+

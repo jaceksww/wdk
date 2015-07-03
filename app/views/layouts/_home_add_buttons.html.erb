@@ -1,0 +1,91 @@
+<!-- Begin Tiles -->
+					<h3>Zamieść na portalu...</h3>
+<div class="tiles">
+<div class="row">
+<div class="col-md-12">	
+<div class="col-md-4">
+					
+													<!--
+													<a href="#addInfoModal" role="button" data-toggle="modal">
+													<div class="tile bg-default btn default" >
+														<div class="tile-body">
+															<i class="fa fa-ellipsis-h" style="color:#666 !important"></i>
+														</div>
+														<div class="tile-object">
+															<div class="name" style="color:#666 !important">
+																 O czym myślisz..? 
+															</div>
+															<div class="number">
+															</div>
+														</div>
+													</div>
+													</a>
+													-->
+												<% if session[:isboot] == 0 %>
+													<a href="#addPostModal" role="button" data-toggle="modal">
+												<% else %>
+													<a href="#isBootModal" role="button" data-toggle="modal">
+												<% end %>
+													<div class="tile bg-blue">
+														<div class="tile-body">
+															<i class="fa fa-comments-o"></i>
+														</div>
+														<div class="tile-object">
+															<div class="name">
+																 Dodaj POST
+															</div>
+															<div class="number">
+															</div>
+														</div>
+													</div>
+													</a>
+</div>
+<div class="col-md-4">
+												<% if session[:isboot] == 0 %>
+													<a href="#addImageModal" role="button" data-toggle="modal">
+												<% else %>
+													<a href="#isBootModal" role="button" data-toggle="modal">
+												<% end %>
+													<div class="tile bg-green">
+														<div class="tile-body">
+															<i class="fa fa-camera"></i>
+														</div>
+														<div class="tile-object">
+															<div class="name">
+																 Dodaj ZDJĘCIE
+															</div>
+															<div class="number">
+															</div>
+														</div>
+													</div>
+													</a>
+</div>
+<div class="col-md-4">													
+												<% if session[:isboot] == 0 %>
+													<a href="#addArticleModal" role="button" data-toggle="modal">
+												<% else %>
+													<a href="#isBootModal" role="button" data-toggle="modal">
+												<% end %>
+													<div class="tile bg-red "><!--selected-->
+														<div class="corner">
+														</div>
+														<div class="check">
+														</div>
+														<div class="tile-body">
+															<i class="fa fa-file-image-o"></i>
+														</div>
+														<div class="tile-object">
+															<div class="name">
+																 Dodaj Artykuł
+															</div>
+															<div class="number">
+															</div>
+														</div>
+													</div>
+													</a>
+												</div>
+</div>
+												<!-- End tiles -->
+</div>
+</div>
+

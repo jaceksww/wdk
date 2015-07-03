@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.4
+Version: 3.9.0
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8"/>
+<meta name="google-site-verification" content="bAs3LSKasop2NuG3rJsORAPhwxG5E4TXBjoFgnx8L1E" />
+<% if current_page?(root_url) %>
+<title>Wędkarstwo Portal wędkarski, ryby, łowiska</title>
+<% else %>
+	<title>Wędkarstwo- <%= @page_title %> <%= @page_sub_title %></title>
+<% end %>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta content="Wędkarstwo- zdjęcia ryb, artykuły wędkarskie, przynęty, metody połowu, <%= @page_title %> <%= @page_sub_title %>" name="description"/>
+<meta content="swedrowski.eu" name="author"/>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<%= render( 'layouts/css_scripts' ) %>
+
+<!-- END THEME STYLES -->
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<!-- BEGIN HEADER -->
+<%= render('layouts/header') %>
+<!-- END HEADER -->
+<style>
+	.btn-super-lg{padding:25px 30px;font-size:20px;}
+	.img-btn-right-bottom{opacity:0.5;position:relative;top:15px; left:25px;font-size:22px !important;}
+</style>
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<%= render 'layouts/sidebar_default' %>
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+							<h4 class="modal-title">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							 Widget settings form goes here
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn blue">Save changes</button>
+							<button type="button" class="btn default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			
+			<!-- BEGIN PAGE HEADER-->
+			<h3 class="page-title">
+			<% if @page_title %>
+				<%= @page_title %>
+			<% end %>
+			<% if @page_title %>
+				<small><%= @page_sub_title %></small>
+			<% end %>
+			</h3>
+
+			<div class="page-bar">
+				<ul class="page-breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="/">Start</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+<% if @breadcrumb_1 %>
+					<li>
+						<a href="<%= @breadcrumb_1['url'] %>"><%= @breadcrumb_1['name'] %></a>
+						<% if @breadcrumb_2['url'] %> <i class="fa fa-angle-right"></i><% end %>
+					</li>
+<% end %>
+<% if @breadcrumb_2 %>
+					<li>
+						<a href="<%= @breadcrumb_2['url'] %>"><%= @breadcrumb_2['name'] %></a>
+						<% if @breadcrumb_3['url'] %><i class="fa fa-angle-right"></i><% end %>
+					</li>
+<% end %>
+<% if @breadcrumb_3 %>
+					<li>
+						<a href="<%= @breadcrumb_3['url'] %>"><%= @breadcrumb_3['name'] %></a>
+					</li>
+<% end %>
+				</ul>
+				
+			</div>
+			
+			
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+			<div class="col-md-12">	
+				<div class="col-md-9">
+				
+				
+				
+					<% if flash[:notice] %>
+					  <div class="Metronic-alerts alert alert-info fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:notice].html_safe %>
+					  </div>
+					<% end %>
+					<% if flash[:error] %>
+					  <div class="Metronic-alerts alert alert-danger fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:error].html_safe %>
+					  </div>
+					<% end %>
+					<% if flash[:success] %>
+					  <div class="Metronic-alerts alert alert-success fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:success].html_safe %>
+					  </div>
+					<% end %>
+					<% if flash[:warning] %>
+					  <div class="Metronic-alerts alert alert-warning fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+						<%= flash[:warning].html_safe %>
+					  </div>
+					<% end %>
+					
+					<%= yield %>
+					
+					<!--REKLAMA-->
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- ror-wedkarstwo.mobi -->
+					<ins class="adsbygoogle"
+						 style="display:block"
+						 data-ad-client="ca-pub-6785867565338897"
+						 data-ad-slot="6923507765"
+						 data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					<!--eof REKLAMA-->
+				
+			    </div>
+				<div class="col-md-3">
+					<%= render('layouts/right_column_main') %>
+				</div>
+			</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- BEGIN CONTENT -->
+	</div>
+	<!-- END CONTENT -->
+	<!-- BEGIN QUICK SIDEBAR -->
+	
+	<% #render('layouts/quick_sidebar')%>
+	
+	<!-- END QUICK SIDEBAR -->
+</div>
+
+<!--addInfoModal modal-->
+<div id="addInfoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			O czym teraz myślisz?
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/add_info_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+<!--addImageModal modal-->
+<div id="addImageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			Dodaj zdjęcie
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/add_image_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+<!--addPostModal modal-->
+<div id="addPostModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			Dodaj post
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/add_post_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+<!--addArticleModal modal-->
+<div id="addArticleModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			Dodaj artykuł
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/add_article_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+<!--addRejestrLowiskoModal modal-->
+<div id="addRejestrLowiskoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			Dodaj nowe Łowisko
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/add_rejestr_lowisko_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+<!--addGalleryModal modal-->
+<div id="addGalleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			Dodaj nową Galerię
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/add_gallery_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+
+<!--isBootModal modal-->
+<div id="isBootModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			Sprawdźmy czy jesteś robotem...
+      </div>
+      <div class="modal-body">
+          <%= render('layouts/isboot_popup') %>
+      </div>
+      <div class="modal-footer">
+          <div>
+          
+            <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<%= render( 'layouts/footer' ) %>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<%= render( 'layouts/js_scripts' ) %>
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

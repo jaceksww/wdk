@@ -1,0 +1,38 @@
+	<%= form_tag( ws_addimage_path, method: "post", multipart: true, class: "login-form") do %>
+		<div class="form-body">
+	        <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                Enter any username and password. </span>
+            </div>
+            <%= hidden_field_tag(:addPost, "1") %>
+            
+			
+			
+          	<div class="form-group form-md-line-input">
+					
+								
+									
+					<div class="form-group form-md-line-input form-md-floating-label">
+										<textarea class="form-control" rows="3"></textarea>
+										<label for="form_control_1">O czym teraz myślisz?</label>
+										<span class="help-block">Opisz dokładniej co masz na myśli...</span>
+					</div>
+				
+			</div>
+			
+			<div class="form-group">
+			    &nbsp;<span class="btn green btn-lg fileinput-button">
+								<i class="fa fa-plus"></i>
+								<span>
+								Wybierz zdjęcie... </span>
+								<input type="file" name="image">
+								</span>
+			  
+			</div>
+			
+			
+             <%= submit_tag("Potwierdź", class:"btn btn-success uppercase") %>
+		</div>
+	<% end %>
+    

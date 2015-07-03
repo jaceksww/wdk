@@ -1,0 +1,5 @@
+<% if avatar && avatar!='' %>
+	<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= avatar %>" class="media-object <%= additionalclass if !additionalclass.nil? %>">
+<% else %>
+	<img alt="" src="<%= Rails.configuration.default_avatar %>" class="media-object <%= additionalclass if !additionalclass.nil? %>">
+<% end %>

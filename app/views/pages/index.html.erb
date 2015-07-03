@@ -1,0 +1,13 @@
+<% @pages.each do |item| %>	
+<div class="panel panel-default">
+  <div class="panel-body">
+  <h1><%= link_to item['pagename'], '/'+item['uri'] %></h1>
+  <% if item['mainimage'] != "" %>
+    <%= image_tag(Rails.configuration.static_url+'images/'+item['mainimage'], style: 'max-height:150px;max-width:250px;') %>
+  <% end %>
+  <br />
+  <%= sanitize(item['body'][0,150].html_safe, :tags=>[])+"..." %>
+  </div>
+</div>
+<% end %>
+<% #debug @pages %>

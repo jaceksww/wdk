@@ -1,0 +1,153 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/profile-old' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN PAGE CONTENT-->
+			<div class="row profile">
+				<div class="col-md-12">
+					<!--BEGIN TABS-->
+					<div class="tabbable-line tabbable-full-width">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a href="#tab_1_1" data-toggle="tab">
+								Profil </a>
+							</li>
+							<!--
+							<li>
+								<a href="#tab_1_3" data-toggle="tab">
+								Account </a>
+							</li>
+							<li>
+								<a href="#tab_1_4" data-toggle="tab">
+								Projects </a>
+							</li>
+							<li>
+								<a href="#tab_1_6" data-toggle="tab">
+								Help </a>
+							</li>
+							-->
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_1_1">
+								<div class="row">
+									<div class="col-md-3">
+										<ul class="list-unstyled profile-nav">
+											<li>
+												<% if @userparams['avatar'] %>
+												<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= @userparams['avatar'] %>" class="img-responsive" >
+												<% else %>
+												<img alt="" src="<%= Rails.configuration.default_avatar %>" class="img-responsive">
+												<% end %>
+												<% if session[:user] && session[:user]['userid'] == @userparams['userid'] %>
+												<a href="javascript:;" class="profile-edit">
+												Zmień </a>
+												<% end %>
+											</li>
+											<% if session[:user] && session[:user]['userid'] == @userparams['userid'] %>
+											<li>
+												<a href="javascript:;">
+												Wiadomości <span>
+												3 </span>
+												</a>
+											</li>
+											<!--
+											<li>
+												<a href="javascript:;">
+												Znajomi </a>
+											</li>
+											-->
+											<li>
+												<a href="/users/settings/<%= @userparams['userid'] %>">
+												Ustawienia </a>
+											</li>
+											<% end %>
+										</ul>
+									</div>
+									<div class="col-md-9">
+										<div class="row">
+											<div class="col-md-8 profile-info">
+												<h1><%= @userparams['displayname'] %></h1>
+												<p>
+													<%= @userparams['bio'] %>			 
+												</p>
+												<p>
+													<a href="javascript:;">
+													www.mywebsite.com </a>
+												</p>
+												<ul class="list-inline">
+													<li>
+														<i class="fa fa-map-marker"></i> Polska
+													</li>
+													<li>
+														<i class="fa fa-calendar"></i> <%= @userparams['datecreated']['date'][0,16] %>
+													</li>
+													<li>
+														<i class="fa fa-briefcase"></i> <%= @userparams['views'] %>
+													</li>
+													<li>
+														<i class="fa fa-star"></i> <%= @userparams['kudos'] %>
+													</li>
+													
+												</ul>
+											</div>
+											<!--end col-md-8-->
+											<div class="col-md-4">
+											<!--
+												<div class="portlet sale-summary">
+													<div class="portlet-title">
+														<div class="caption">
+															 Sales Summary
+														</div>
+														<div class="tools">
+															<a class="reload" href="javascript:;">
+															</a>
+														</div>
+													</div>
+													<div class="portlet-body">
+														<ul class="list-unstyled">
+															<li>
+																<span class="sale-info">
+																TODAY SOLD <i class="fa fa-img-up"></i>
+																</span>
+																<span class="sale-num">
+																23 </span>
+															</li>
+															<li>
+																<span class="sale-info">
+																WEEKLY SALES <i class="fa fa-img-down"></i>
+																</span>
+																<span class="sale-num">
+																87 </span>
+															</li>
+															<li>
+																<span class="sale-info">
+																TOTAL SOLD </span>
+																<span class="sale-num">
+																2377 </span>
+															</li>
+															<li>
+																<span class="sale-info">
+																EARNS </span>
+																<span class="sale-num">
+																$37.990 </span>
+															</li>
+														</ul>
+													</div>
+												</div>
+												-->
+											</div>
+											<!--end col-md-4-->
+										</div>
+										<!--end row-->
+										
+									</div>
+								</div>
+							
+							
+					</div>
+					<!--END TABS-->
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+	</div>
+	<!-- END CONTENT -->

@@ -1,0 +1,32 @@
+<style>
+.simg-thumb{width:50px;height:50px;}
+</style>
+<ul class="dropdown-menu-list scroller" style="height: 1000px;" data-handle-color="#637283">
+	<% @global_infos.each do |el| %>
+		<% if !el['unread'] %>
+		 
+		<li 
+		<% if el['type'] == 'WIADOMOŚĆ'%>
+		style="background:lightgreen"
+		<% end %>
+		>
+		
+									<a href="<%= el['url'] %>">
+									<!--<span class="time">just now</span>-->
+									<span class="details">
+									<span class="label label-sm label-icon label-success">
+									<i class="fa fa-plus"></i>
+									</span>
+									<%= el['authordisplayname'].html_safe %><br />
+									<%= el['datecreated']['date'][0,16] %><br />
+									<% if el['new'] == 1 %>
+									<strong><%= el['content'].html_safe %></strong>
+									<% else %>
+									<%= el['content'].html_safe %>
+									<% end %>
+									 </span>
+									</a>
+								</li>
+		<% end %>
+	<% end %>
+</ul>

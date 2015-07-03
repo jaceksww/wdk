@@ -1,0 +1,45 @@
+
+<div class="row inbox">
+				<div class="col-md-2">
+					<%= render ('messages/sidemenu'), active: '' %>
+				</div>
+				<div class="col-md-10">
+					<div class="inbox-content">
+					
+					<div class="row">
+					<div class="col-md-12">
+						<h1 class="pull-left"><%= @message['subject'] %></h1>
+					</div>
+					</div>
+					<div class="inbox-view-info">
+						<div class="row">
+							<div class="col-md-2">
+								<%= render ('layouts/avatar'), avatar: @message['avatar'], additionalclass: 'img-circle small-img-40' %>
+							</div>
+							<div class="col-md-10">
+								<span class="bold">
+								<%= @message['displayname'] %> </span>
+								do <span class="bold">
+								<%= @message['todisplayname'] %> </span>
+								dnia <%= @message['datecreated']['date'][0,16] %>
+		
+							</div>
+							<p style="clear:both">&nbsp;</p>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="inbox-view">
+									<%= @message['message'] %>
+								</div>
+								<br />
+								<br />
+								<a href="javascript:;" data-messageid="23" class="btn blue btn-lg"><i class="fa fa-reply"></i> Odpowiedz </a>
+							</div>
+						</div>
+					</div>
+					
+					
+					</div>
+				</div>
+			</div>
+<%= stylesheet_link_tag    '/assets/admin/pages/css/inbox' %>

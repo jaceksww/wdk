@@ -1,0 +1,55 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<%= stylesheet_link_tag    '/assets/admin/pages/css/todo' %>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<% if session[:isboot] == 0 %>
+	<a href="#addPostModal" role="button" id="addTopicBtn" class="btn green btn-lg" data-forumname="<%= @forums_topics[0]['forumname']%>" data-catid="<%= @forums_topics[0]['catid']%>" data-forumid="<%= @forums_topics[0]['forumid']%>" data-toggle="modal">
+<% else %>
+		<a href="#isBootModal" class="btn green btn-lg" role="button" data-toggle="modal">
+<% end %>
+Dodaj nowy wątek
+</a>
+
+<div class="panel-heading"><h2><%= @forums_topics[0]['forumname']%></h2></div>
+
+<div class="todo-tasklist">
+ 
+  <div class="panel-body">
+    <ul>
+    <% @forums_topics.each do |item| %>
+	<div class="todo-tasklist-item todo-tasklist-item-border-green">
+		<img class="todo-userpic pull-left" src="../../assets/admin/layout/img/avatar4.jpg" width="27px" height="27px">
+		<div class="todo-tasklist-item-title">
+			 <%= item['displayname']%>
+		</div>
+		<div class="todo-tasklist-item-text">
+			 <%= link_to item['topictitle'], forums_viewtopic_path+"/"+item['topicid'].to_s  %>
+		</div>
+		<div class="todo-tasklist-controls pull-left">
+				<span class="todo-tasklist-date"><i class="fa fa-calendar"></i> <%= item['datecreated']['date'][0,16]%> </span>
+				<!--<span class="todo-tasklist-badge badge badge-roundless">Urgent</span>-->
+		</div>
+	</div>
+      
+    <% end %>
+    </ul>
+  </div>
+</div>
+  
+ <% #debug @forums_topics %>
+<script>
+	jQuery(function($) {
+		
+		$("#addTopicBtn").click(function(){
+				$('#addpost_form #addpost_catid option[value="'+$(this).data('catid')+'"]').prop('selected', true);
+				$('#addpost_form #addpost_forumid_'+$(this).data('catid')+' option[value="'+$(this).data('forumid')+'"]').prop('selected', true);
+				$('#addpost_displaytitle').text($(this).data('forumname'));
+				
+				$('.addpost_box').hide();
+				$('#addpost_box_cat_'+$(this).data('catid')).show();
+				
+				$('#checkboxAddTopic').trigger('click');
+		});
+		
+	  });
+</script>
