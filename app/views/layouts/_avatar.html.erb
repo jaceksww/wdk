@@ -1,5 +1,13 @@
 <% if avatar && avatar!='' %>
-	<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= avatar %>" class="media-object <%= additionalclass if !additionalclass.nil? %>">
+	<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= avatar %>" class="media-object <%= additionalclass if !additionalclass.nil? %>"
+	<% if !(defined?(additionalstyle)).nil? %>
+		 style="<%= additionalstyle %>" 
+	<% end %>
+	> 
 <% else %>
-	<img alt="" src="<%= Rails.configuration.default_avatar %>" class="media-object <%= additionalclass if !additionalclass.nil? %>">
+	<img alt="" src="<%= Rails.configuration.default_avatar %>" class="media-object <%= additionalclass if !additionalclass.nil? %>" 
+	<% if !(defined?(additionalstyle)).nil? %>
+		 style="<%= additionalstyle %>" 
+	<% end %>
+	>
 <% end %>

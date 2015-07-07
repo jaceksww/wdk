@@ -33,7 +33,7 @@
 								</div>
 								<br />
 								<br />
-								<a href="javascript:;" data-messageid="23" class="btn blue btn-lg"><i class="fa fa-reply"></i> Odpowiedz </a>
+								<a href="/messages/create/<%= @message['userid'] %>" class="btn blue btn-lg"><i class="fa fa-reply"></i> Odpowiedz </a>
 							</div>
 						</div>
 					</div>
