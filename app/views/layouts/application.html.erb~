@@ -195,6 +195,16 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- END QUICK SIDEBAR -->
 </div>
 
+
+
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<%= render( 'layouts/footer' ) %>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<%= render( 'layouts/js_scripts' ) %>
+<!-- END JAVASCRIPTS -->
+
 <!--addInfoModal modal-->
 <div id="addInfoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -331,19 +341,12 @@ License: You must have a valid license purchased only from themeforest(the above
           <div>
           
             <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
-		  </div>	
+		  </div>	 
       </div>
   </div>
   </div>
 </div>
 
-<!-- END CONTAINER -->
-<!-- BEGIN FOOTER -->
-<%= render( 'layouts/footer' ) %>
-<!-- END FOOTER -->
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<%= render( 'layouts/js_scripts' ) %>
-<!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
 </html>
