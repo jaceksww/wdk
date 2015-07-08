@@ -17,7 +17,9 @@
 								<% if @view_ws_www["0"]['wwwtitle'] == "GALERIA" || @view_ws_www["0"]['wwwtitle'] == "REJESTR" %>
 										<% if @view_ws_www["0"]['description'] != "" %>
 										  <center>
-										  <%= image_tag(Rails.configuration.static_url+"images/"+@view_ws_www["0"]['description'].gsub('JPG', 'jpg') ,class: "img-responsive") %>
+										  <% if !@view_ws_www["0"]['description'].nil? %>
+											<%= image_tag(Rails.configuration.static_url+"images/"+@view_ws_www["0"]['description'].gsub('JPG', 'jpg') ,class: "img-responsive") %>
+										  <% end %>
 										  </center>
 										  <p class="clearfix">&nbsp;</p>
 										<% end %>

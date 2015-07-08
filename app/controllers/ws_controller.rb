@@ -60,7 +60,7 @@ class WsController < ApplicationController
     if !@view_ws_www["0"]['excerpt'].nil? && @view_ws_www["0"]['excerpt'] != ""
     @page_title = 'Zdjęcia'
     @breadcrumb_1['name'] = 'Zdjęcia'
-		@breadcrumb_2['name'] = @view_ws_www["0"]['excerpt'][0,30].html_safe+"..."
+		@breadcrumb_2['name'] = @view_ws_www["0"]['excerpt'][0,30].html_safe+"..." if !@view_ws_www["0"]['excerpt'].nil?
 		@page_sub_title = @view_ws_www['0']['excerpt'][0,30].html_safe+"..."
     else
     	@breadcrumb_2['name'] = @view_ws_www["0"]['wwwtitle']
