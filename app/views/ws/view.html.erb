@@ -125,7 +125,12 @@
 							</div>
 							<div class="post-comment">
 								<h3>Skomentuj</h3>
-								<%= render('layouts/ws/comments_form', wwwid: @view_ws_www["0"]['wwwid'] )%>
+								<% if session[:isboot] == 0 %>
+									<%= render('layouts/ws/comments_form', wwwid: @view_ws_www["0"]['wwwid'] )%>
+								<% else %>
+									<a href="#isBootModal" role="button" data-toggle="modal">Kliknij tutaj, sprawdzimy czy nie jesteś robotem :)</a>
+								<% end %>
+								
 							</div>
 						</div>
 						<!--end col-md-9-->
