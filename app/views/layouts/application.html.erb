@@ -29,8 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta content="Wędkarstwo- zdjęcia ryb, artykuły wędkarskie, przynęty, metody połowu, <%= @page_title %> <%= @page_sub_title %>" name="description"/>
 <meta content="swedrowski.eu" name="author"/>
-<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
         
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%= render( 'layouts/css_scripts' ) %>
@@ -49,10 +48,18 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
 <!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
 <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+
+<style>
+.modal-dialog {
+  margin: 80px auto !important;
+}
+</style>
 <body class="page-header-fixed page-quick-sidebar-over-content ">
-<%= render('layouts/home/facebook_popup') %>
+
+
 <!-- BEGIN HEADER -->
 <%= render('layouts/header') %>
+
 <!-- END HEADER -->
 <style>
 	.btn-super-lg{padding:25px 30px;font-size:20px;}
@@ -62,6 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
+
 	<!-- BEGIN SIDEBAR -->
 	<%= render 'layouts/sidebar_default' %>
 	<!-- END SIDEBAR -->
@@ -92,16 +100,40 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			
 			<!-- BEGIN PAGE HEADER-->
-			<h3 class="page-title">
-			<% if @page_title %>
-				<%= @page_title %>
-			<% end %>
-			<% if @page_title %>
-				<small><%= @page_sub_title %></small>
-			<% end %>
-			</h3>
+			<div class="row">
+				<div class="col-md-6">	
+
+					<h3 class="page-title">
+					<% if @page_title %>
+						<%= @page_title %>
+					<% end %>
+					<% if @page_title %>
+						<small><%= @page_sub_title %></small>
+					<% end %>
+					</h3>
+				</div>
+				<div class="col-md-6">
+					<!--REKLAMA-->
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- ror-wedkarstwo.mobi -->
+					<ins class="adsbygoogle"
+						 style="display:block"
+						 data-ad-client="ca-pub-6785867565338897"
+						 data-ad-slot="6923507765"
+						 data-ad-format="auto"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					<!--eof REKLAMA-->
+				</div>
+			</div>
+				
 
 			<div class="page-bar">
+			
+			<a href="#facebookModal" role="button" data-toggle="modal" id="showFacebookPopup" style="font-size:0px;line-height:0px;">&nbsp;</a>
+
+			
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
@@ -207,7 +239,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END JAVASCRIPTS -->
 
 <!--addInfoModal modal-->
-<div id="addInfoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="addInfoModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -227,7 +259,7 @@ License: You must have a valid license purchased only from themeforest(the above
   </div>
 </div>
 <!--addImageModal modal-->
-<div id="addImageModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="addImageModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -247,7 +279,7 @@ License: You must have a valid license purchased only from themeforest(the above
   </div>
 </div>
 <!--addPostModal modal-->
-<div id="addPostModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="addPostModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -267,7 +299,7 @@ License: You must have a valid license purchased only from themeforest(the above
   </div>
 </div>
 <!--addArticleModal modal-->
-<div id="addArticleModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="addArticleModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -287,7 +319,7 @@ License: You must have a valid license purchased only from themeforest(the above
   </div>
 </div>
 <!--addRejestrLowiskoModal modal-->
-<div id="addRejestrLowiskoModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="addRejestrLowiskoModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -307,7 +339,7 @@ License: You must have a valid license purchased only from themeforest(the above
   </div>
 </div>
 <!--addGalleryModal modal-->
-<div id="addGalleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="addGalleryModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -328,7 +360,7 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>
 
 <!--isBootModal modal-->
-<div id="isBootModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="isBootModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -347,6 +379,8 @@ License: You must have a valid license purchased only from themeforest(the above
   </div>
   </div>
 </div>
+
+<%= render('layouts/home/facebook_popup') %>
 
 </body>
 <!-- END BODY -->
