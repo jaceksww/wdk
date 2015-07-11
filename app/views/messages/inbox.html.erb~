@@ -1,9 +1,9 @@
 
 <div class="row inbox">
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<%= render ('messages/sidemenu'), active: 'inbox' %>
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-9">
 					<div class="inbox-header">
 						<h1 class="pull-left">Odebrane</h1>
 						
@@ -38,7 +38,7 @@
 							</div>
 						-->
 						</th>
-						<th class="pagination-control" colspan="3">
+						<th class="pagination-control" colspan="4">
 							<!--
 							<span class="pagination-info">
 							1-30 of 789 </span>
@@ -74,6 +74,11 @@
 							</td>
 							<td class="view-message text-right">
 								 <%= el['datecreated']['date'][0,16] %>
+							</td>
+							<td class="view-message text-right">
+								 <a href="/messages/delete/<%= el['messageid']%>/<%= el['touserid']%>" onclick="return confirm('Usunąć element?')">
+									<span class="todo-tasklist-badge badge badge-roundless">Usuń</span>
+								</a>
 							</td>
 						</tr>
 					<% end %>

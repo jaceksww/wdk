@@ -38,7 +38,7 @@
 							</div>
 						-->
 						</th>
-						<th class="pagination-control" colspan="3">
+						<th class="pagination-control" colspan="4">
 							<!--
 							<span class="pagination-info">
 							1-30 of 789 </span>
@@ -67,13 +67,18 @@
 								 <%= el['displayname'] %> 
 							</td>
 							<td class="view-message ">
-								<a href="/messages/view/<%= el['messageid'] %>">[ <%= el['subject'] %> ] <%= el['message'][0,100] %></a>
+								<a href="/messages/view/<%= el['messageid'] %>">[ <%= el['subject'] %> ] <%= el['message'][0,30] %></a>
 							</td>
 							<td class="view-message inbox-small-cells">
 								<!--<i class="fa fa-paperclip"></i>-->
 							</td>
 							<td class="view-message text-right">
 								 <%= el['datecreated']['date'][0,16] %>
+							</td>
+							<td class="view-message text-right">
+								 <a href="/messages/delete/<%= el['messageid']%>/<%= el['userid']%>" onclick="return confirm('Usunąć element?')">
+									<span class="todo-tasklist-badge badge badge-roundless">Usuń</span>
+								</a>
 							</td>
 						</tr>
 					<% end %>

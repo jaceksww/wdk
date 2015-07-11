@@ -8,13 +8,13 @@
 					
 					<div class="row">
 					<div class="col-md-12">
-						<h1 class="pull-left"><%= @message['subject'] %></h1>
+						<h1 class="pull-left"><%= sanitize @message['subject'] %></h1>
 					</div>
 					</div>
 					<div class="inbox-view-info">
 						<div class="row">
 							<div class="col-md-2">
-								<%= render ('layouts/avatar'), avatar: @message['avatar'], additionalclass: 'img-circle small-img-40' %>
+								<%= render ('layouts/avatar'), avatar: @message['avatar'], additionalclass: 'img-circle small-img-40', additionalstyle: 'height:50px;width:50px;' %>
 							</div>
 							<div class="col-md-10">
 								<span class="bold">
