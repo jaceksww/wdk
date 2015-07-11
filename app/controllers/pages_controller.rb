@@ -44,8 +44,8 @@ class PagesController < ApplicationController
   end
   def ryba
     pageid = params[:id]
-    if params[:id2]
-        pageid += '-_-'+params[:id2]
+    if params[:more]
+        pageid += '-_-'+params[:more]
     end
     
     
@@ -60,7 +60,11 @@ class PagesController < ApplicationController
     @pages = parsed_json
     
     @page_title = @pages[0]['pagename']
+    if params[:more]
+    @page_sub_title = ''
+    else
     @page_sub_title = 'Na co bierze '+@pages[0]['pagename']+ ', kiedy bierze '+@pages[0]['pagename']+ ', jak złowić '+@pages[0]['pagename']+ ', przynęty, zanęty'
+    end
     @breadcrumb_1['name'] = 'Ryby'
     @breadcrumb_1['url'] = '/ryby'
     @breadcrumb_2['name'] = @pages[0]['pagename']
