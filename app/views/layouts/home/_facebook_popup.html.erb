@@ -58,8 +58,9 @@ return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').e
 jQuery(document).ready(function($){
 	if($.cookie('popup_user_login') != 'yes'){
 	$('#showFacebookPopup').trigger( "click" );
-	}
 	$.cookie('popup_user_login', 'yes', { path: '/', expires: 1 });
+	}
+	
 });
 </script>
 
