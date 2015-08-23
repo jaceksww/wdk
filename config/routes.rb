@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   get 'forums/viewforum/:id' => 'forums#viewforum'
   get 'forums/viewtopic'
   get 'forums/viewtopic/:id' => 'forums#viewtopic'
+  get 'forums/viewtopic/:id/:start' => 'forums#viewtopic'
   get 'forums/deletepost/:postid/:userid/:topicid' => 'forums#deletepost'
   get 'forums/addtopic'
 

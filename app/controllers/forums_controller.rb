@@ -52,14 +52,22 @@ class ForumsController < ApplicationController
     if params[:id]
         id = params[:id]
     end
-    source = Rails.configuration.ws_url+'rest/forums/posts/'+id.to_s
+    start = 0
+    if params[:start]
+        start = params[:start]
+    end
+    limit= Rails.configuration.pagination_limit
+    
+    source = Rails.configuration.ws_url+'rest/forums/posts/'+id.to_s+'/'+start.to_s+'/'+limit.to_s
     resp = Net::HTTP.get_response(URI.parse(source))
     data = resp.body
     result = JSON.parse(data)
     parsed_json = ActiveSupport::JSON.decode(data)
     
     @forums_posts = parsed_json
-	
+	@start = start
+    @limit = limit
+    
 	@breadcrumb_2['url'] = '/forums/viewforum/'+@forums_posts[0]['forumid'].to_s
     @breadcrumb_2['name'] = @forums_posts[0]['forumname'].to_s
 	@breadcrumb_3['url'] = '/forums/viewtopic/'+id.to_s

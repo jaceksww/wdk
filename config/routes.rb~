@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'messages/create/:touserid' => 'messages#create'
   post 'messages/create'
 
-  get 'messages/delete'
+  get 'messages/delete/:messageid/:userid' => 'messages#delete'
 
   get 'messages/view/:messageid' =>'messages#view'
 
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   get 'forums/viewforum/:id' => 'forums#viewforum'
   get 'forums/viewtopic'
   get 'forums/viewtopic/:id' => 'forums#viewtopic'
-
+  get 'forums/deletepost/:postid/:userid/:topicid' => 'forums#deletepost'
   get 'forums/addtopic'
 
   get 'forums/addreply'
@@ -83,7 +83,7 @@ Rails.application.routes.draw do
   get 'pages/view'
   get 'ryby' => 'pages#ryby'
   get 'ryby/:id' => 'pages#ryba'
-  get 'ryby/:more/:id' => 'pages#ryba'
+  get 'ryby/:id/:more' => 'pages#ryba'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

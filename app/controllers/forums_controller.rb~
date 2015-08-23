@@ -52,14 +52,22 @@ class ForumsController < ApplicationController
     if params[:id]
         id = params[:id]
     end
-    source = Rails.configuration.ws_url+'rest/forums/posts/'+id.to_s
+    start = 0
+    if params[:start]
+        start = params[:start]
+    end
+    limit= Rails.configuration.pagination_limit
+    
+    source = Rails.configuration.ws_url+'rest/forums/posts/'+id.to_s+'/'++start.to_s+'/'+limit.to_s
     resp = Net::HTTP.get_response(URI.parse(source))
     data = resp.body
-    #result = JSON.parse(data)
+    result = JSON.parse(data)
     parsed_json = ActiveSupport::JSON.decode(data)
     
     @forums_posts = parsed_json
-	
+	@start = start
+    @limit = limit
+    
 	@breadcrumb_2['url'] = '/forums/viewforum/'+@forums_posts[0]['forumid'].to_s
     @breadcrumb_2['name'] = @forums_posts[0]['forumname'].to_s
 	@breadcrumb_3['url'] = '/forums/viewtopic/'+id.to_s
@@ -73,22 +81,12 @@ class ForumsController < ApplicationController
 
   def addreply
     #render :text => params
-    topicID = 642
-    userID = @USER['userid']
     
-    if params.include?(:addTopic) || params.include?(:addPost)
-    #https://www.google.com/recaptcha/admin#site/319320560?setup
-       addPostCaptcha= RestClient.post 'https://www.google.com/recaptcha/api/siteverify',
-          {:secret => Rails.configuration.captcha_secret_addpost, :response =>  params[:'g-recaptcha-response'] }
-      captchaResp = JSON.parse(addPostCaptcha)
-      #render :text => captchaResp["success"]
-      if captchaResp["success"].nil? || !captchaResp["success"]
-      	flash[:error] = "Nie dodano artykułu. Źle zweryfikoany mechanizm antyspamowy"
-        redirect_to '/'
-      end
-    end
+    userID = @USER['userid']
+    topicID = 0
+    
       
-    if params.include?(:addTopic)
+    if params.include?(:addTopic) && session[:isboot] == 0
     	topicTitle = params[:topicTitle]
         forumID = params[:forumID][params[:catID]]
 		#render :text => forumID
@@ -99,7 +97,7 @@ class ForumsController < ApplicationController
 		topicID = parsed_json['topicid'].to_s
     end
         
-    if params.include?(:addPost)
+    if params.include?(:addPost) && session[:isboot] == 0
       base64 = ''
       imageName = ''
       if params.include?(:image)
@@ -108,10 +106,9 @@ class ForumsController < ApplicationController
       end
 
       body = params[:body]
-      if params.include?(:topicID) && params[:topicID] != ''
-        topicID = params[:topicID]
+	  if topicID == 0
+      	topicID = params[:topicID]
       end
-     
         addArticle = RestClient.post Rails.configuration.ws_url+'rest/forums/addpost',
           {:base64 => base64, :userID =>  userID, :imageName =>  imageName,
             :body => body, :topicID => topicID  }
@@ -130,9 +127,28 @@ class ForumsController < ApplicationController
           redirect_to forums_addreply_path
          else
          	flash[:success] = "Post dodano pomyślnie"
-            redirect_to '/'
+            redirect_to request.referer
         end
     end  
+  end
+  
+  def deletepost
+  	require 'net/http'
+    
+	userID = session[:user]['userid']
+	
+	if userID.to_s != params[:userid].to_s
+		render :text => "???"
+    else
+		#render :text => Rails.configuration.ws_url+'rest/messages/delete/'+params[:messageid].to_s+'/'+params[:userid].to_s;
+        source = Rails.configuration.ws_url+'rest/forums/deletepost/'+params[:postid].to_s
+		resp = Net::HTTP.get_response(URI.parse(source))
+		data = resp.body
+		parsed_json = ActiveSupport::JSON.decode(data)
+		flash[:success] = "Element został usunięty"
+		redirect_to "/forums/viewtopic/"+params[:topicid].to_s
+	end
+   
   end
 
   def subscribe
