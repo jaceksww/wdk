@@ -80,7 +80,8 @@ Rails.application.configure do
   config.ws_url = 'http://iniserwer.home.pl/wedkarstwows.swedrowski.eu/web/app_dev.php/'
   config.static_url = 'http://iniserwer.home.pl/wedkarstwo.mobi/'
   config.pagination_limit = 20
-  config.default_avatar = '../../assets/admin/pages/media/blog/5.jpg'
+  config.local_assets = 'http://wedkarstwo.mobi/assets/'
+  config.default_avatar = 'http://wedkarstwo.mobi/assets/admin/pages/media/blog/5.jpg'
   config.captcha_secret_addarticle = '6LfwcQgTAAAAAIgul_N3Y9W3l0gzQj-Q_mPrYUyU'
   config.captcha_secret_addpost = '6LcZeAgTAAAAAEXNKEjJPUeQQagkUfbVa7J9kELU'
   config.captcha_secret_addimage = '6LfOeAgTAAAAAHx1m1tllzZSTf7ccTCZ8TzDpn3b'

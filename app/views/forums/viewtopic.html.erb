@@ -22,7 +22,7 @@
 			<% if !item['avatar'].nil? %>
 			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="media-object">
 			<% else %>
-			<img alt="" src="../../assets/admin/pages/media/blog/5.jpg" class="media-object">
+			<%= image_tag(Rails.configuration.default_avatar, :class=>'media-object') %>
 			<% end %>
 			</a>
 			<div class="media-body">
