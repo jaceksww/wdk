@@ -37,6 +37,8 @@
 										<strong><%= @view_ws_www["0"]['description2'].html_safe %></strong>
 										<br /><%= @view_ws_www["0"]['excerpt'].html_safe if @view_ws_www["0"]['excerpt'] %>
 								   <% else %>
+								   <%= @view_ws_www["0"]['excerpt'].html_safe if @view_ws_www["0"]['excerpt'] %>
+								   <hr />
 										<strong>Ryba: <%= @view_ws_www["0"]['fishname'] %></strong>
 										<br />
 										Przynęta: <%= @view_ws_www["0"]['bite'] %> 
