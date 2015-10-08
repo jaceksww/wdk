@@ -1,24 +1,34 @@
 <!-- BEGIN PAGE LEVEL STYLES -->
 <%= stylesheet_link_tag    '/assets/admin/pages/css/todo' %>
 <!-- END PAGE LEVEL SCRIPTS -->
+<style>
+.latests-forum .todo-tasklist-item {
+    padding: 3px;
+    margin-bottom: 3px;
+}
+.latests-forum .todo-tasklist-item {
+    padding: 3px;
+    margin-bottom: 3px;
+}
+.latests-forum ul {
+padding:0px;
+}
+</style>
 
-<% if session[:isboot] == 0 %>
-	<a href="#addPostModal" role="button" id="addTopicBtn" class="btn green btn-lg" data-forumname="<%= @forums_topics[0]['forumname']%>" data-catid="<%= @forums_topics[0]['catid']%>" data-forumid="<%= @forums_topics[0]['forumid']%>" data-toggle="modal">
-<% else %>
-		<a href="#isBootModal" class="btn green btn-lg" role="button" data-toggle="modal">
-<% end %>
-Dodaj nowy wątek
-</a>
 
-<div class="panel-heading"><h2><%= @forums_topics[0]['forumname']%></h2></div>
+<div class="panel-heading"><h2>Najnowsze posty na forum</h2></div>
 
 <div class="todo-tasklist">
  
-  <div class="panel-body">
+  <div class="panel-body latests-forum">
     <ul>
-    <% @forums_topics.each do |item| %>
+    <% forums_topics_latests.each do |item| %>
 	<div class="todo-tasklist-item todo-tasklist-item-border-green">
-		<img class="todo-userpic pull-left" src="../../assets/admin/layout/img/avatar4.jpg" width="27px" height="27px">
+		<% if !item['avatar'].nil? %>
+			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="todo-userpic pull-left"  width="27px" height="27px">
+		<% else %>
+			<img alt="" src="../../assets/admin/pages/media/blog/5.jpg" class="todo-userpic pull-left"  width="27px" height="27px">
+		<% end %>
 		<div class="todo-tasklist-item-title">
 			 <%= item['displayname']%>
 		</div>

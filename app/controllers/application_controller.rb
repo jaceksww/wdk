@@ -64,6 +64,7 @@ class ApplicationController < ActionController::Base
     @user_galleries = parsed_json['usergalleries']
     @ws_categories = parsed_json['categories']
     @forum_categories = parsed_json['forum_categories']
+    @latests_forum = parsed_json['latests_forum']
    
   end
   

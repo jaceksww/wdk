@@ -225,7 +225,10 @@ License: You must have a valid license purchased only from themeforest(the above
 				
 			    </div>
 				<div class="col-md-3">
-					<%= render('layouts/right_column_main') %>
+					<%# render('forums/viewforumlatests', locals:{forums_topics_latests: @latests_forum } )%>
+					<%= render "forums/viewforumlatests", :forums_topics_latests=>@latests_forum %>
+					<hr />
+					<%# render('layouts/right_column_main') %>
 				</div>
 			</div>
 			</div>

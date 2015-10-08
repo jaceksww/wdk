@@ -20,10 +20,10 @@
 		<div class="media">
 			<a href="javascript:;" class="pull-left">
 			<% if !item['avatar'].nil? %>
-			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="media-object">
-			<% else %>
-			<%= image_tag(Rails.configuration.default_avatar, :class=>'media-object') %>
-			<% end %>
+			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="todo-userpic pull-left"  width="27px" height="27px">
+		<% else %>
+			<img alt="" src="../../assets/admin/pages/media/blog/5.jpg" class="todo-userpic pull-left"  width="27px" height="27px">
+		<% end %>
 			</a>
 			<div class="media-body">
 				<h4 class="media-heading"><%= item['displayname'] %> <span>
