@@ -75,24 +75,28 @@
 		Pierwsza strona
 		</a>
 	</li>
-	<li>
-		<a href="/forums/viewtopic/<%= @forums_posts[0]['topicid']%>/<%= @start.to_i - @limit.to_i %>">
-		<i class="fa fa-angle-left"></i> Poprzenia
-		</a>
-	</li>
+		<% if @start.to_i != 999999 %>
+		<li>
+			<a href="/forums/viewtopic/<%= @forums_posts[0]['topicid']%>/<%= @start.to_i - @limit.to_i %>">
+			<i class="fa fa-angle-left"></i> Poprzenia
+			</a>
+		</li>
+		<% end %>
 	<% end %>
-<!--
-<% for i in 0..10 %>	
-	<li>
-		<a href="javascript:;"> <%= i %> </a>
-	</li>
-<% end %>
--->
+	<% if @start.to_i != 999999 %>
 	<li>
 	<a href="/forums/viewtopic/<%= @forums_posts[0]['topicid']%>/<%= @start.to_i + @limit.to_i %>">
 	Następna <i class="fa fa-angle-right"></i>
 	</a>
 	</li>
+	<% end %>
+	<% if @start.to_i != 999999 %>
+	<li>
+		<a href="/forums/viewtopic/<%= @forums_posts[0]['topicid']%>/999999">
+		Ostatnia strona
+		</a>
+	</li>
+	<% end %>
 </ul>
 </div>
 
