@@ -1,0 +1,31 @@
+class SitemapController < ApplicationController
+  layout nil
+
+  def index
+    #headers['Content-Type'] = 'application/xml'
+
+#    last_post = Post.last
+#    if stale?(:etag => last_post, :last_modified => last_post.updated_at.utc)
+#      respond_to do |format|
+#        format.xml { @posts = Post.sitemap } # sitemap is a named scope
+#      end
+#    end
+#
+	require 'net/http'
+    id =0
+    if params[:id]
+        id = params[:id]
+    end
+    source = Rails.configuration.ws_url+'rest/forums/topics/9999'
+    resp = Net::HTTP.get_response(URI.parse(source))
+    data = resp.body
+    #result = JSON.parse(data)
+    parsed_json = ActiveSupport::JSON.decode(data)
+    
+    @topics = parsed_json
+
+	respond_to do |format|
+       format.xml
+     end
+  end
+end
