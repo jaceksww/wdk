@@ -4,7 +4,9 @@
 <% @ws_registers.each do |item| %>
 	<div class="col-md-4 col-sm-4 mix category_1">
 		<div class="mix-inner">
+			<a href="<%= ws_path %>/w,<%=item['wwwid'].to_s %>" class="mix-link">
 			<img class="img-responsive" style="width:280px;height:210px;" src="<%= Rails.configuration.static_url %>images/<%= item['description'].gsub('JPG', 'jpg') if item['description'] %>" alt="">
+			</a>
 			<div class="mix-details">
 				<h4><%= item['excerpt'] %></h4>
 				<%= link_to '<i class="fa fa-link"></i>'.html_safe, ws_path+"/w,"+item['wwwid'].to_s, class:"mix-link"  %>

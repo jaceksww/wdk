@@ -230,7 +230,7 @@
 		  <div class="news-blocks">
 			   <% if item['image'] && item['image'] != "" %>
 					<p>
-					<%= image_tag(Rails.configuration.static_url+"static/uploads/"+item['image'], class: "news-block-img img-circle pull-right") %> 
+					<%= image_tag(Rails.configuration.static_url+"images/"+item['image'], class: "img-responsive") %> 
 					</p>
 			   <% end %>
 			   <%= item['body'].html_safe %>

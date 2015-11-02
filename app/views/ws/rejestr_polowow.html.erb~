@@ -1,4 +1,4 @@
-<h1>Rejestr połowów</h1>
+
 <div class="row mix-grid">
 
 <% @ws_registers.each do |item| %>

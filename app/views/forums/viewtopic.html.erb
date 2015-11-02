@@ -20,9 +20,9 @@
 		<div class="media">
 			<a href="javascript:;" class="pull-left">
 			<% if !item['avatar'].nil? %>
-			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="todo-userpic pull-left"  width="27px" height="27px">
+			<img alt="" src="<%= Rails.configuration.static_url%>images/avatars/<%= item['avatar'] %>" class="todo-userpic pull-left"  width="27px" height="27px">
 		<% else %>
-			<img alt="" src="../../assets/admin/pages/media/blog/5.jpg" class="todo-userpic pull-left"  width="27px" height="27px">
+			<img alt="" src="../../../assets/admin/pages/media/blog/5.jpg" class="todo-userpic pull-left"  width="27px" height="27px">
 		<% end %>
 			</a>
 			<div class="media-body">
@@ -39,11 +39,18 @@
 			
 				
 				</h4>
+				
 				<p>
+				
 					 <% item['body'].sub! '[quote]' , '<blockquote>'  %>
 					 <% item['body'].sub! '[/quote]' , '</blockquote>'  %>
 					 <%= item['body'].html_safe %>
 				</p>
+				<% if item['image'] && item['image'] != "" %>
+					
+					<%= image_tag(Rails.configuration.static_url+"images/"+item['image'], class: "img-responsive", style:"height:300px;width:auto !important;") %> 
+					
+			   <% end %>
 			</div>
 		</div>
 		<!--end media-->

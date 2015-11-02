@@ -139,6 +139,7 @@
 		  </div>
 		  <% elsif item['type'] == 'REJESTR' %>
 		  <div class="top-news">
+			
 				<a href="/ws/w,<%= item['wwwid'] %>" class="btn green">
 				<% if item['parentid'] == 0 %>
 				<span>"<%= item['displayname'] %>" dodał łowisko do "Rejestru połowów"<br />
@@ -168,6 +169,8 @@
 					<strong><%= item['description2'].html_safe %></strong>
 					<br /><%= item['excerpt'].html_safe if item['excerpt'] %>
 			   <% else %>
+			   <%= item['excerpt'].html_safe if item['excerpt'] %>
+			   <hr />
 					<strong>Ryba: <%= item['fishname'] %></strong>
 					<br />
 					Przynęta: <%= item['bite'] %> 
@@ -227,7 +230,7 @@
 		  <div class="news-blocks">
 			   <% if item['image'] && item['image'] != "" %>
 					<p>
-					<%= image_tag(Rails.configuration.static_url+"static/uploads/"+item['image'], class: "news-block-img img-circle pull-right") %> 
+					<%= image_tag(Rails.configuration.static_url+"images/"+item['image'], class: "img-responsive") %> 
 					</p>
 			   <% end %>
 			   <%= item['body'].html_safe %>
@@ -267,6 +270,7 @@
 	 </div>
 <% end %>
 <% end %>
+
 </div>                     
 </div><!--/row-->
 

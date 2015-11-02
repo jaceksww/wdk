@@ -33,7 +33,7 @@ License: You must have a valid license purchased only from themeforest(the above
         
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%= render( 'layouts/css_scripts' ) %>
-
+<%= javascript_include_tag '/assets/global/plugins/jquery.min' %>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
 </head>
@@ -134,27 +134,31 @@ License: You must have a valid license purchased only from themeforest(the above
 			<a href="#facebookModal" role="button" data-toggle="modal" id="showFacebookPopup" style="font-size:0px;line-height:0px;">&nbsp;</a>
 
 			
-				<ul class="page-breadcrumb">
-					<li>
+				<ul class="page-breadcrumb"  vocab="http://schema.org/" typeof="BreadcrumbList>
+					<li property="itemListElement" typeof="ListItem">
 						<i class="fa fa-home"></i>
-						<a href="/">Start</a>
+						<a property="item" typeof="WebPage" href="/"><span property="name">Start</span></a>
+						<meta property="position" content="1">
 						<i class="fa fa-angle-right"></i>
 					</li>
 <% if @breadcrumb_1 %>
-					<li>
-						<a href="<%= @breadcrumb_1['url'] %>"><%= @breadcrumb_1['name'] %></a>
+					<li property="itemListElement" typeof="ListItem">
+						<a property="item" typeof="WebPage" href="<%= @breadcrumb_1['url'] %>"><span property="name"><%= @breadcrumb_1['name'] %></span></a>
+						<meta property="position" content="2">
 						<% if @breadcrumb_2['url'] %> <i class="fa fa-angle-right"></i><% end %>
 					</li>
 <% end %>
 <% if @breadcrumb_2 %>
-					<li>
-						<a href="<%= @breadcrumb_2['url'] %>"><%= @breadcrumb_2['name'] %></a>
+					<li property="itemListElement" typeof="ListItem">
+						<a property="item" typeof="WebPage" href="<%= @breadcrumb_2['url'] %>"><span property="name"><%= @breadcrumb_2['name'] %></span></a>
+						<meta property="position" content="3">
 						<% if @breadcrumb_3['url'] %><i class="fa fa-angle-right"></i><% end %>
 					</li>
 <% end %>
 <% if @breadcrumb_3 %>
-					<li>
-						<a href="<%= @breadcrumb_3['url'] %>"><%= @breadcrumb_3['name'] %></a>
+					<li property="itemListElement" typeof="ListItem">
+						<a property="item" typeof="WebPage" href="<%= @breadcrumb_3['url'] %>"><span property="name"><%= @breadcrumb_3['name'] %></span></a>
+						<meta property="position" content="4">
 					</li>
 <% end %>
 				</ul>

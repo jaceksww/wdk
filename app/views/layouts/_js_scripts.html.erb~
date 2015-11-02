@@ -104,13 +104,23 @@ jQuery(document).ready(function() {
 </script>
 <% end %>
 
+<% if url.include?('forums') %>
+<script>
+	jQuery(function($) {
+		
+		$("#addPostReply").click(function(){
+				$('#addpost_form #topicID').val($(this).data('topicid'));
+				$('#addpost_displaytitle').text($(this).data('topictitle'));
+		});
+		$("#addPostReply2").click(function(){
+				$('#addpost_form #topicID').val($(this).data('topicid'));
+				$('#addpost_displaytitle').text($(this).data('topictitle'));
+		});
+		
+	  });
+</script>
+<% end %>
+
 <!-- BEGIN GOOGLE RECAPTCHA -->
-<script type="text/javascript">
-        var RecaptchaOptions = {
-           theme : 'custom',
-           custom_theme_widget: 'recaptcha_widget_addarticle'
-        };
-    </script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LcrK9cSAAAAALEcjG9gTRPbeA0yAVsKd8sBpFpR"></script>
 <!-- END GOOGLE RECAPTCHA -->
