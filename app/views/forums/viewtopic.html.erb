@@ -20,7 +20,7 @@
 		<div class="media">
 			<a href="javascript:;" class="pull-left">
 			<% if !item['avatar'].nil? %>
-			<img alt="" src="<%= Rails.configuration.static_url%>images/avatars/<%= item['avatar'] %>" class="todo-userpic pull-left"  width="27px" height="27px">
+			<img alt="" src="<%= Rails.configuration.static_url%>static/uploads/avatars/<%= item['avatar'] %>" class="todo-userpic pull-left"  width="27px" height="27px">
 		<% else %>
 			<img alt="" src="../../../assets/admin/pages/media/blog/5.jpg" class="todo-userpic pull-left"  width="27px" height="27px">
 		<% end %>
@@ -48,7 +48,7 @@
 				</p>
 				<% if item['image'] && item['image'] != "" %>
 					
-					<%= image_tag(Rails.configuration.static_url+"images/"+item['image'], class: "img-responsive", style:"height:300px;width:auto !important;") %> 
+					<%= image_tag(Rails.configuration.static_url+"static/uploads/"+item['image'], class: "img-responsive", style:"height:300px;width:auto !important;") %> 
 					
 			   <% end %>
 			</div>
