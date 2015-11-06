@@ -41,10 +41,7 @@
 				</h4>
 				
 				<p>
-				
-					 <% item['body'].sub! '[quote]' , '<blockquote>'  %>
-					 <% item['body'].sub! '[/quote]' , '</blockquote>'  %>
-					 <%= item['body'].html_safe %>
+					 <%= item['body'].to_s.html_safe %>
 				</p>
 				<% if item['image'] && item['image'] != "" %>
 					

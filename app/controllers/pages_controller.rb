@@ -68,7 +68,7 @@ class PagesController < ApplicationController
     @breadcrumb_1['name'] = 'Ryby'
     @breadcrumb_1['url'] = '/ryby'
     @breadcrumb_2['name'] = @pages[0]['pagename']
-    @breadcrumb_2['url'] = '/ryby/'+@pages[0]['pagename']
+    @breadcrumb_2['url'] = '/'+@pages[0]['uri']
     
     
   end
