@@ -39,10 +39,8 @@
 			
 				
 				</h4>
+				<%= item['body'] %>
 				
-				<p>
-					 <%= item['body'].html_safe %>
-				</p>
 				<% if item['image'] && item['image'] != "" %>
 					
 					<%= image_tag(Rails.configuration.static_url+"static/uploads/"+item['image'], class: "img-responsive", style:"height:300px;width:auto !important;") %> 
